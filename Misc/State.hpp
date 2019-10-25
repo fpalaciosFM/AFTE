@@ -16,6 +16,7 @@ class State {
 
     std::string toLatex();
     std::string toLatex(State q);
+    std::string toLatexClosure(State q, int out, int in);
     std::string toLatex(std::string sigma, State q);
     void setPos(double, double);
     void setIndex(int i);

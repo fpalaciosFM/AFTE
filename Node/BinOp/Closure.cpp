@@ -17,8 +17,8 @@ void Closure::AfteLatex(State& qi, State& qf, double x, double y, int& count, st
     s += r.toLatex();
     s += qf.toLatex();
     e += qi.toLatex(r);
-    e += r.toLatex(pi);
-    e += pf.toLatex(r);
+    e += r.toLatexClosure(pi, 135, -90);
+    e += pf.toLatexClosure(r, -90, 45);
     e += r.toLatex(qf);
 
     left->AfteLatex(pi, pf, x + (width - left->width) / 2, y + height - left->height, count, s, e);

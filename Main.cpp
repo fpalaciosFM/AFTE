@@ -50,8 +50,9 @@ int main() {
     State q(2, "accepting");
     RegExpr exp;
     cin >> exp;
+    cout << exp.printTree();
+    cout << "\\\\" << endl;
     cout << exp.AfteLatex();
-    cout << "% Main :: Hola Mundo" << endl; 
 
     return 0;
 }

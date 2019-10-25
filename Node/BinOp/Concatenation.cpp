@@ -10,7 +10,7 @@ void Concatenation::AfteLatex(State& qi, State& qf, double x, double y, int& cou
     State pi(count++), pf(count++);
     e += pf.toLatex(pi);
 
-    left->AfteLatex(qi, pf, x, y + (height - right->height) / 2, count, s, e);
+    left->AfteLatex(qi, pf, x, y + (height - left->height) / 2, count, s, e);
     right->AfteLatex(pi, qf, x + left->width + E, y + (height - right->height) / 2, count, s, e);
 }
 
