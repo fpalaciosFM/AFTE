@@ -7,7 +7,24 @@ Closure::Closure(Node* l) : BinOp(l, NULL) {
 Closure::~Closure(void) {
 }
 
-void Closure::initDims(){
+void Closure::AfteLatex(State& qi, State& qf, double x, double y, int& count, string& s, string& e) {
+    cout << "% Closure :: Hola Mundo" << endl;
+    State pi(count++), r(count++), pf(count++);
+    qi.setPos(x, y);
+    r.setPos(x + (width - N) / 2, y);
+    qf.setPos(x + width - N, y);
+    s += qi.toLatex();
+    s += r.toLatex();
+    s += qf.toLatex();
+    e += qi.toLatex(r);
+    e += r.toLatex(pi);
+    e += pf.toLatex(r);
+    e += r.toLatex(qf);
+
+    left->AfteLatex(pi, pf, x + (width - left->width) / 2, y + height - left->height, count, s, e);
+}
+
+void Closure::initDims() {
     left->initDims();
     this->height = left->height + N + E;
     this->width = (3 * N + 2 * E >= left->width) ? (3 * N + 2 * E) : left->width;

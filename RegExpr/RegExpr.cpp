@@ -84,6 +84,10 @@ void Arden(RegExpr** A, int N) {
     }
 }
 
-string RegExpr::printTree(){
+string RegExpr::printTree() {
     return ptr->printTree();
+}
+
+string RegExpr::AfteLatex() {
+    return ptr->AfteLatex();
 }

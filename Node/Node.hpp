@@ -37,7 +37,7 @@ class Node {
     // AFTE Latex Printing
     double height;
     double width;
-    const double E = 1.5;
+    const double E = 1.0;
     const double N = 1.0;
 
     virtual void initDims();

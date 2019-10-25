@@ -40,21 +40,18 @@ Execute:
 				Eduardo Viruena Silva
 				November, 2003
 */
-#include "RegExpr/RegExp.hpp"
 #include "Latex/Latex.hpp"
 #include "Misc/State.hpp"
+#include "RegExpr/RegExp.hpp"
 
 using namespace std;
 
 int main() {
-     State q(1.5,2.25,23);
-     cout << q.x << endl;
-     cout << q.y << endl;
-     cout << q.index << endl;
-     cout << q.toLatex("accepting,initial");
-//     RegExpr exp;
-//     cin >> exp;
-//     cout << exp.printTree();
+    State q(2, "accepting");
+    RegExpr exp;
+    cin >> exp;
+    cout << exp.AfteLatex();
+    cout << "% Main :: Hola Mundo" << endl; 
 
     return 0;
 }

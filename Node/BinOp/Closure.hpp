@@ -15,6 +15,9 @@ class Closure : public BinOp {
 
     // AFTE Latex Printing
     virtual void initDims();
+    
+    //AFTE Latex Printing
+    virtual void AfteLatex(State& qi, State& qf, double x, double y, int& count, string& s, string& e);
 };
 
 #endif /* CLOSURE_HPP */

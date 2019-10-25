@@ -6,7 +6,15 @@ Concatenation::Concatenation(Node* l, Node* r) : BinOp(l, r) {
 
 Concatenation::~Concatenation() {}
 
-void Concatenation::initDims(){
+void Concatenation::AfteLatex(State& qi, State& qf, double x, double y, int& count, string& s, string& e) {
+    State pi(count++), pf(count++);
+    e += pf.toLatex(pi);
+
+    left->AfteLatex(qi, pf, x, y + (height - right->height) / 2, count, s, e);
+    right->AfteLatex(pi, qf, x + left->width + E, y + (height - right->height) / 2, count, s, e);
+}
+
+void Concatenation::initDims() {
     left->initDims();
     right->initDims();
     this->height = right->height >= left->height ? right->height : left->height;
