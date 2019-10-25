@@ -2,6 +2,8 @@
 #define NODE_HPP
 
 #include <iostream>
+#include "../Misc/Misc.hpp"
+#include "../Misc/State.hpp"
 #include "../Latex/Latex.hpp"
 
 using namespace std;
@@ -39,8 +41,8 @@ class Node {
     const double N = 1.0;
 
     virtual void initDims();
-    // virtual string AfteLatex();
-    // virtual void AfteLatex();
+    virtual string AfteLatex();
+    virtual void AfteLatex(State& qi, State& qf, double x, double y, int& count, string& s, string& e);
 };
 
 void tabs(string& s, int k);

@@ -42,13 +42,19 @@ Execute:
 */
 #include "RegExpr/RegExp.hpp"
 #include "Latex/Latex.hpp"
+#include "Misc/State.hpp"
 
 using namespace std;
 
 int main() {
-    RegExpr exp;
-    cin >> exp;
-    cout << exp.printTree();
+     State q(1.5,2.25,23);
+     cout << q.x << endl;
+     cout << q.y << endl;
+     cout << q.index << endl;
+     cout << q.toLatex("accepting,initial");
+//     RegExpr exp;
+//     cin >> exp;
+//     cout << exp.printTree();
 
     return 0;
 }

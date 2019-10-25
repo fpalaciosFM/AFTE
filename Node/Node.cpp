@@ -2,9 +2,28 @@
 
 Node::~Node() {}
 
-void Node::initDims(){
+void Node::initDims() {
     height = N;
-    width = 2*N + E;
+    width = 2 * N + E;
+}
+
+string Node::AfteLatex() {
+    initDims();
+    string tikz, s, e;
+    State qi(0), qf(1);
+    int count = 2;
+    AfteLatex(qi, qf, 0, 0, count, s, e);
+    s += qi.toLatex();
+    s += qf.toLatex();
+
+    tikz += "\\begin{tikzsfigure}[initial text = \"$M$\"]\n";
+    tikz += s;
+    tikz += "\\path[->]\n";
+    tikz += e;
+    tikz += ";\n";
+    tikz += "\\end{tikzpicture}\n";
+
+    return tikz;
 }
 
 string Node::printTree() {
