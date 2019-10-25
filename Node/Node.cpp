@@ -3,7 +3,6 @@
 Node::~Node() {}
 
 void Node::initDims(){
-    x = y = 0;
     height = N;
     width = 2*N + E;
 }

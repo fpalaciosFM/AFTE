@@ -33,15 +33,14 @@ class Node {
     virtual string printTree(int&);
 
     // AFTE Latex Printing
-    virtual void initDims();
-    //AFTE Latex Printing{
     double height;
     double width;
-    double x;
-    double y;
     const double E = 1.5;
     const double N = 1.0;
+
+    virtual void initDims();
     // virtual string AfteLatex();
+    // virtual void AfteLatex();
 };
 
 void tabs(string& s, int k);
