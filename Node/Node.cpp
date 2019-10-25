@@ -2,6 +2,12 @@
 
 Node::~Node() {}
 
+void Node::initDims(){
+    x = y = 0;
+    height = N;
+    width = 2*N + E;
+}
+
 string Node::printTree() {
     int k = 0;
     return printTree(k);

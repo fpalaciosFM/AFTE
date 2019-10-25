@@ -6,6 +6,13 @@ Union::Union(Node* l, Node* r) : BinOp(l, r) {
 
 Union::~Union(void) {}
 
+void Union::initDims(){
+    left->initDims();
+    right->initDims();
+    this->height = left->height + right->height + N;
+    this->width = 2*N + 2*E + (left->width >= right->width ? left->width : right->width);
+}
+
 int Union::Type(void) const {
     return UNION;
 }

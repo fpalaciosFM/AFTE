@@ -7,6 +7,12 @@ Closure::Closure(Node* l) : BinOp(l, NULL) {
 Closure::~Closure(void) {
 }
 
+void Closure::initDims(){
+    left->initDims();
+    this->height = left->height + N + E;
+    this->width = (3 * N + 2 * E >= left->width) ? (3 * N + 2 * E) : left->width;
+}
+
 int Closure::Type(void) const {
     return CLOSURE;
 }

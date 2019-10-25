@@ -6,6 +6,13 @@ Concatenation::Concatenation(Node* l, Node* r) : BinOp(l, r) {
 
 Concatenation::~Concatenation() {}
 
+void Concatenation::initDims(){
+    left->initDims();
+    right->initDims();
+    this->height = right->height >= left->height ? right->height : left->height;
+    this->width = left->width + right->width + E;
+}
+
 int Concatenation::Type(void) const {
     return CONCAT;
 }

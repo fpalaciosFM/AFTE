@@ -11,6 +11,9 @@ class Concatenation : public BinOp {
     virtual Node* Copy(void) const;
     virtual Node* Simp(void) const;
     virtual ostream& Print(ostream& os) const;
+
+    // AFTE Latex Printing
+    virtual void initDims();
 };
 
 #endif /* CONCATENATION_HPP */

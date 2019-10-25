@@ -20,14 +20,6 @@ class Node {
     // Tree Latex Printing
     string texStr;
 
-    //AFTE Latex Printing{
-    double Height;
-    double Width;
-    double x;
-    double y;
-    const double E = 1.5;
-    const double N = 1.0;
-
    public:
     virtual ~Node();
     virtual int Type(void) const = 0;
@@ -41,9 +33,15 @@ class Node {
     virtual string printTree(int&);
 
     // AFTE Latex Printing
-    // virtual void initDims();
+    virtual void initDims();
+    //AFTE Latex Printing{
+    double height;
+    double width;
+    double x;
+    double y;
+    const double E = 1.5;
+    const double N = 1.0;
     // virtual string AfteLatex();
-    // virtual void setPos(double, double);
 };
 
 void tabs(string& s, int k);
