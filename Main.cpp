@@ -40,19 +40,35 @@ Execute:
 				Eduardo Viruena Silva
 				November, 2003
 */
+#include <unordered_set>
+#include <unordered_map>
 #include "Latex/Latex.hpp"
 #include "Misc/State.hpp"
 #include "RegExpr/RegExp.hpp"
+#include "AFTE/AFTE_State.hpp"
+
 
 using namespace std;
 
 int main() {
-    State q(2, "accepting");
+/*    State q(2, "accepting");
     RegExpr exp;
     cin >> exp;
     cout << exp.printTree();
     cout << "\\\\" << endl;
     cout << exp.AfteLatex();
+    unordered_set<int> x;
+    x.insert(3);
+    x.insert(5);
+    x.insert(1);
+
+    unordered_set<int>::iterator itr;
+
+    for (itr = x.begin(); itr != x.end(); itr++)    {
+        cout << (*itr) << endl;
+    }*/
+
+    printf("Todo Bien.\n");
 
     return 0;
 }
