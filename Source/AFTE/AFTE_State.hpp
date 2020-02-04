@@ -12,6 +12,7 @@ class AFTE_State {
    public:
     static int* count;
     unordered_map<char, unordered_set<AFTE_State*>> transitions;
+    unordered_set<AFTE_State*> lambdas;
     bool final;
     int id;
 
@@ -21,10 +22,8 @@ class AFTE_State {
 
     unordered_set<AFTE_State*> read(char);
     void addTransition(char c, AFTE_State* q);
+    void addLambda(AFTE_State* q);
     ostream& print(ostream& os);
-
-   private:
-    unordered_set<AFTE_State*> read(char, unordered_set<AFTE_State*>);
 };
 
 #endif /* AFTE_STATE */

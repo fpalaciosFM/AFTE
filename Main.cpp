@@ -64,13 +64,8 @@ int main() {
     string s = "101010";
     stringstream* ss = new stringstream(s);
 
-    state1.addTransition('1', &state2);
-    state1.addTransition('0', &state1);
-    state2.addTransition('0', &state1);
-    state2.addTransition('0', &state2);
-
-	state1.print(cout) << endl;
-	state2.print(cout) << endl;
+    state1.print(cout) << endl;
+    state2.print(cout) << endl;
 
     // state.read(char(ss->get()));
 
