@@ -40,33 +40,39 @@ Execute:
 				Eduardo Viruena Silva
 				November, 2003
 */
-#include <unordered_set>
+#include <string>
 #include <unordered_map>
-#include "Latex/Latex.hpp"
-#include "Misc/State.hpp"
-#include "RegExpr/RegExp.hpp"
-#include "AFTE/AFTE_State.hpp"
-
+#include <unordered_set>
+#include "Source/AFTE/AFTE_State.hpp"
+#include "Source/Latex/Latex.hpp"
+#include "Source/Misc/State.hpp"
+#include "Source/RegExpr/RegExp.hpp"
 
 using namespace std;
 
 int main() {
-/*    State q(2, "accepting");
-    RegExpr exp;
-    cin >> exp;
-    cout << exp.printTree();
-    cout << "\\\\" << endl;
-    cout << exp.AfteLatex();
-    unordered_set<int> x;
-    x.insert(3);
-    x.insert(5);
-    x.insert(1);
+    // State q(2, "accepting");
+    // RegExpr exp;
+    // cin >> exp;
+    // cout << exp.printTree();
+    // cout << "\\\\" << endl;
+    // cout << exp.AfteLatex();
 
-    unordered_set<int>::iterator itr;
+    AFTE_State state1(1);
+    AFTE_State state2(2);
 
-    for (itr = x.begin(); itr != x.end(); itr++)    {
-        cout << (*itr) << endl;
-    }*/
+    string s = "101010";
+    stringstream* ss = new stringstream(s);
+
+    state1.addTransition('1', &state2);
+    state1.addTransition('0', &state1);
+    state2.addTransition('0', &state1);
+    state2.addTransition('0', &state2);
+
+	state1.print(cout) << endl;
+	state2.print(cout) << endl;
+
+    // state.read(char(ss->get()));
 
     printf("Todo Bien.\n");
 
