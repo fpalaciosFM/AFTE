@@ -1,7 +1,11 @@
 #ifndef STATE_HPP
 #define STATE_HPP
 
+#include <iostream>
 #include <string>
+#include <unordered_set>
+
+using namespace std;
 
 class State {
    public:
