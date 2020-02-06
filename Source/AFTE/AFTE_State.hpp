@@ -1,5 +1,5 @@
-#ifndef AFTE_STATE
-#define AFTE_STATE
+#ifndef AFTE_STATE_HPP
+#define AFTE_STATE_HPP
 
 #include <iostream>
 #include <sstream>
@@ -26,4 +26,4 @@ class AFTE_State {
     ostream& print(ostream& os);
 };
 
-#endif /* AFTE_STATE */
+#endif /* AFTE_STATE_HPP */
