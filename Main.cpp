@@ -43,6 +43,9 @@ Execute:
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
+#include "Source/AFD/AFD.hpp"
+#include "Source/AFD/AFD_State.hpp"
+#include "Source/AFTE/AFTE.hpp"
 #include "Source/AFTE/AFTE_State.hpp"
 #include "Source/Latex/Latex.hpp"
 #include "Source/Misc/State.hpp"
@@ -58,81 +61,29 @@ int main() {
     // cout << "\\\\" << endl;
     // cout << exp.AfteLatex();
 
-    AFTE_State state1(1);
-    AFTE_State state2(2);
-    AFTE_State state3(3);
-    AFTE_State state4(4);
-    AFTE_State state5(5);
-    AFTE_State state6(6, true);
+    AFD_State q1(7, true);
+    AFD_State q2(5);
 
-    string s = "101010";
+    AFD A;
+
+    cout << q1.id << endl;
+    cout << q1.final << endl;
+    cout << q2.id << endl;
+    cout << q2.final << endl;
+
+    A.addTransition(&q1, '0', &q2);
+    A.addTransition(&q1, '1', &q1);
+    A.addTransition(&q2, '0', &q1);
+    A.addTransition(&q2, '1', &q2);
+
+    cout << A.toString() << endl;
+
+    string s = "00";
     stringstream* ss = new stringstream(s);
 
-    state1.addLambda(&state2);
-    state2.addLambda(&state3);
-    state2.addLambda(&state6);
-    state3.addTransition('1', &state4);
-    state4.addTransition('0', &state5);
-    state5.addLambda(&state2);
-
-    unordered_set<AFTE_State*> conjunto = {&state1};
-
-    unordered_set<AFTE_State*> conjuntoEK = conjunto;
-    while (ss->good()) {
-        char c = ss->get();
-
-        if (c > 0) {
-            cout << endl;
-            unordered_set<AFTE_State*> conjuntoEi;
-            unordered_set<AFTE_State*> conjuntoEii = conjunto;
-            int oldLength;
-
-            do {
-                conjuntoEi = conjuntoEii;
-                conjuntoEii = unordered_set<AFTE_State*>();
-                oldLength = conjuntoEK.size();
-				cout << c << endl;
-                cout << "oldLength = " << oldLength << endl;
-
-                //
-                cout << "Ei = { ";
-                for (auto& state : conjuntoEi) {
-                    cout << state->id << ' ';
-                }
-                cout << '}' << endl;
-
-                cout << "Eii = { ";
-                for (auto& state : conjuntoEii) {
-                    cout << state->id << ' ';
-                }
-                cout << '}' << endl;
-
-                cout << "EK = { ";
-                for (auto& state : conjuntoEK) {
-                    cout << state->id << ' ';
-                }
-                cout << '}' << endl;
-				//
-
-                for (auto& state : conjuntoEi) {
-                    for (auto& q : state->lambdas) {
-                        conjuntoEii.insert(q);
-                    }
-                }
-
-                for (auto& state : conjuntoEii) {
-                    conjuntoEK.insert(state);
-                }
-                cout << "newLength = " << conjuntoEK.size() << endl;
-
-                // conjuntoEK.merge(conjuntoEii);
-            } while (conjuntoEK.size() != oldLength);
-        }
-    }
-
-    // state.read(char(ss->get()));
+    // cout << "A.read(" << s << ") = " << A.read(ss)->id << endl;
+    cout << "A.recognize(" << s << ") = " << A.recognize(ss) << endl;
 
     printf("Todo Bien.\n");
-
     return 0;
 }
