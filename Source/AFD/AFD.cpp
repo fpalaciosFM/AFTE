@@ -12,7 +12,6 @@ void AFD::addTransition(AFD_State* q, char c, AFD_State* p) {
         this->finalStates.insert(q);
     }
 
-    // ¿Sera posible simplificar las siguientes lineas?
     if (this->transitions.find(q) == this->transitions.end()) {
         this->transitions.insert({q, map_insert});
     } else {
@@ -72,4 +71,20 @@ AFD_State* AFD::read(stringstream* ss) {
 bool AFD::recognize(stringstream* ss) {
     AFD_State* result = this->read(ss);
     return result->final;
+}
+
+AFD::AFD(AFTE M) {
+    int count = 0;
+    unordered_set<AFTE_State*> AFTE_initialState = M.initialStates;
+    bool initialState_isFinal = M.isFinal(AFTE_initialState);
+    this->initialState = new AFD_State(count++, initialState_isFinal, &AFTE_initialState);
+
+    unordered_set<AFTE_State*> state0 = M.read(AFTE_initialState, '0');
+    unordered_set<AFTE_State*> state1 = M.read(AFTE_initialState, '1');
+
+    AFD_State q0(count++, M.isFinal(state0), &state0);
+    AFD_State q1(count++, M.isFinal(state1), &state1);
+
+    unordered_set<AFD_State*> statesInserted;
+    statesInserted.insert(this->initialState);
 }

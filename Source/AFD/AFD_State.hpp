@@ -7,11 +7,15 @@ class AFD_State {
    public:
     int id;
     bool final;
-    // unordered_set<AFTE_State*> AFTE_Equivalent;
+    unordered_set<AFTE_State*>* AFTE_Equivalent;
 
     AFD_State(int id);
-    AFD_State(int id, bool final) : AFD_State(id) { this->final = final; };
+    AFD_State(int id, bool final);
+    AFD_State(int id, bool final, unordered_set<AFTE_State*>* conjunto);
     ~AFD_State(){};
+
+    bool isEquivalent(AFD_State*);
+    bool inAFDStateSet(unordered_set<AFD_State*>* AFTE_States);
 };
 
 #endif /* AFD_STATE_HPP */
