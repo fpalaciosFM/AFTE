@@ -73,6 +73,26 @@ bool AFD::recognize(stringstream* ss) {
     return result->final;
 }
 
+void AFD::makeTransitions(AFD_State* q, unordered_set<AFD_State*>* insertedStates, AFTE& M, int& count) {
+    if (q->inAFDStateSet(insertedStates)) {
+        return;
+    }
+
+    unordered_set<AFTE_State*> state0 = M.read(*(q->AFTE_Equivalent), '0');
+    unordered_set<AFTE_State*> state1 = M.read(*(q->AFTE_Equivalent), '1');
+
+    AFD_State q0(count++, M.isFinal(state0), &state0);
+    AFD_State q1(count++, M.isFinal(state1), &state1);
+
+    insertedStates->insert(q);
+
+    this->makeTransitions(&q0, insertedStates, M, count);
+    this->makeTransitions(&q1, insertedStates, M, count);
+
+    this->addTransition(q, '0', &q0);
+    this->addTransition(q, '1', &q1);
+}
+
 AFD::AFD(AFTE M) {
     int count = 0;
     unordered_set<AFTE_State*> AFTE_initialState = M.initialStates;
@@ -85,6 +105,12 @@ AFD::AFD(AFTE M) {
     AFD_State q0(count++, M.isFinal(state0), &state0);
     AFD_State q1(count++, M.isFinal(state1), &state1);
 
-    unordered_set<AFD_State*> statesInserted;
-    statesInserted.insert(this->initialState);
+    unordered_set<AFD_State*> insertedStates;
+    insertedStates.insert(this->initialState);
+
+    this->makeTransitions(&q0, &insertedStates, M, count);
+    this->makeTransitions(&q1, &insertedStates, M, count);
+
+    this->addTransition(this->initialState, '0', &q0);
+    this->addTransition(this->initialState, '1', &q1);
 }

@@ -18,6 +18,7 @@ class AFD {
     // AFD_State* read(char c);
     AFD_State* read(stringstream* ss);
     bool recognize(stringstream* ss);
+    void makeTransitions(AFD_State* q, unordered_set<AFD_State*>* insertedStates, AFTE& M, int& count);
 };
 
 #endif /* AFD_HPP */
