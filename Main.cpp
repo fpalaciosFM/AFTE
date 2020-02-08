@@ -61,6 +61,59 @@ int main() {
     // cout << "\\\\" << endl;
     // cout << exp.AfteLatex();
 
+    // AFD_State q1(7, true);
+    // AFD_State q2(5);
+
+    // AFD A;
+
+    // cout << q1.id << endl;
+    // cout << q1.final << endl;
+    // cout << q2.id << endl;
+    // cout << q2.final << endl;
+
+    // A.addTransition(&q1, '0', &q2);
+    // A.addTransition(&q1, '1', &q1);
+    // A.addTransition(&q2, '0', &q1);
+    // A.addTransition(&q2, '1', &q2);
+
+    // cout << A.toString() << endl;
+
+    // string s = "00";
+    // stringstream* ss = new stringstream(s);
+
+    // // cout << "A.read(" << s << ") = " << A.read(ss)->id << endl;
+    // cout << "A.recognize('" << s << "') = " << A.recognize(ss) << endl;
+
+    AFTE_State state1(1);
+    AFTE_State state2(2);
+    AFTE_State state3(3);
+    AFTE_State state4(4);
+    AFTE_State state5(5);
+    AFTE_State state6(6, true);
+
+    string s = "101010";
+    stringstream* ss = new stringstream(s);
+
+    state1.addLambda(&state2);
+    state2.addLambda(&state3);
+    state2.addLambda(&state6);
+    state3.addTransition('1', &state4);
+    state4.addTransition('0', &state5);
+    state5.addLambda(&state2);
+
+    unordered_set<AFTE_State*> conjunto = {&state1};
+
+    AFTE B;
+    B.addState(&state1);
+
+    AFD A(B);
+
+    cout << A.toString() << endl;
+
+	// for(auto& x:A.states){
+	// 	cout << x->toString() << endl;
+	// }
+
     printf("Todo Bien.\n");
     return 0;
 }

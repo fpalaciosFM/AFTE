@@ -25,10 +25,10 @@ class AFTE {
     unordered_set<AFTE_State*> read(stringstream* ss);
     bool isFinal(unordered_set<AFTE_State*> conjunto);
     bool recognize(stringstream* ss);
+	string toString();
 };
 
 #endif /* AFTE_HPP */
-
 
 // AFTE_State state1(1);
 // AFTE_State state2(2);
@@ -51,6 +51,5 @@ class AFTE {
 
 // AFTE A;
 // A.addState(&state1);
-// unordered_set<AFTE_State*> result = A.RelationE({&state1});
 
-// cout << A.recognize(ss) << endl;
+// cout << "A.recognize('" << s << "') = " << A.recognize(ss) << endl;

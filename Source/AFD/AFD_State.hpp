@@ -15,7 +15,9 @@ class AFD_State {
     ~AFD_State(){};
 
     bool isEquivalent(AFD_State*);
+    bool isEquivalent(AFTE_State*);
     bool inAFDStateSet(unordered_set<AFD_State*>* AFTE_States);
+    string toString();
 };
 
 #endif /* AFD_STATE_HPP */

@@ -49,3 +49,15 @@ ostream& AFTE_State::print(ostream& os) {
     cout << '}';
     return os;
 }
+
+string AFTE_State::toString() {
+    string s = "{ ";
+    for (auto& transition : this->transitions) {
+        for (auto& q : transition.second) {
+            s += "(" + to_string(this->id) + ",'" + transition.first + "'," + to_string(q->id) + ") ";
+        }
+    }
+    for (auto& lambda : this->lambdas) {
+        s += "(" + to_string(this->id) + ",'" + to_string(lambda->id) + " ";
+    }
+}

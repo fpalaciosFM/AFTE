@@ -5,15 +5,18 @@
 
 class AFD {
    public:
+    unordered_set<AFD_State*> states;
     AFD_State* initialState;
     unordered_set<AFD_State*> finalStates;
     unordered_map<AFD_State*, unordered_map<char, AFD_State*>> transitions;
+    // AFTE* AFTE_Equivalent;
 
     AFD(){};
     AFD(AFTE M);
     ~AFD(){};
     void addTransition(AFD_State* q, char c, AFD_State* p);
     string toString();
+    AFD_State* findAFDState(unordered_set<AFTE_State*>& qs);
 
     // AFD_State* read(char c);
     AFD_State* read(stringstream* ss);

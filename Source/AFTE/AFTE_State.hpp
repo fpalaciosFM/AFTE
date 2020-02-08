@@ -24,6 +24,7 @@ class AFTE_State {
     void addTransition(char c, AFTE_State* q);
     void addLambda(AFTE_State* q);
     ostream& print(ostream& os);
+    string toString();
 };
 
 #endif /* AFTE_STATE_HPP */

@@ -38,3 +38,15 @@ bool AFD_State::inAFDStateSet(unordered_set<AFD_State*>* AFTE_States) {
     }
     return false;
 }
+
+string AFD_State::toString() {
+    string s;
+    s += "{\n";
+    s += "\t id: " + to_string(this->id) + ",\n";
+    s += "\t final: " + to_string(this->final) + ",\n";
+    s += "\t AFTE_Eq: {";
+
+    // for (auto& x : *(this->AFTE_Equivalent)) {
+	// 	s += "\t\t" + x->toString() + "\n";
+    // }
+}
