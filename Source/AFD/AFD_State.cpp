@@ -1,5 +1,7 @@
 #include "AFD_State.hpp"
 
+int AFD_State::count = 0;
+
 AFD_State::AFD_State(int id) {
     this->id = id;
 }

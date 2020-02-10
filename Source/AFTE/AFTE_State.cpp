@@ -1,7 +1,9 @@
 #include "AFTE_State.hpp"
 
+// count se utiliza para no tener que darle nombre a cada estado, se genera automaticamente
 int AFTE_State::count = 0;
 
+// Constructor que asigna el identificador
 AFTE_State::AFTE_State() {
     this->id = AFTE_State::count++;
 }
@@ -66,6 +68,7 @@ string AFTE_State::toString() {
     return s;
 }
 
+// Funcion para verificar si un estado 'q' es un elemento del conjunto 'conjunto'.
 bool isStateIn(AFTE_State* q, unordered_set<AFTE_State*> conjunto) {
     for (auto& state : conjunto) {
         if (q == state) {

@@ -5,6 +5,7 @@
 
 class AFD_State {
    public:
+    static int count;
     int id;
     unordered_set<AFTE_State*> AFTE_Equivalent;
 

@@ -5,10 +5,10 @@
 
 class AFD {
    public:
-    unordered_set<AFD_State*> states;
-    AFD_State* initialState;
-    unordered_set<AFD_State*> finalStates;
-    unordered_map<AFD_State*, unordered_map<char, AFD_State*>> transitions;
+    unordered_set<AFD_State*> states;		// E(Q)
+    AFD_State* initialState;				// E*({q_0})
+    unordered_set<AFD_State*> finalStates;	// G
+    unordered_map<AFD_State*, unordered_map<char, AFD_State*>> transitions;	// g:E(Q)xZ->E(Q)
 
     AFD(){};
     ~AFD(){};

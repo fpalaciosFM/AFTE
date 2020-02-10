@@ -28,27 +28,23 @@ class AFTE {
 
 #endif /* AFTE_HPP */
 
-// AFTE_State state1(1);
-// AFTE_State state2(2);
-// AFTE_State state3(3);
-// AFTE_State state4(4);
-// AFTE_State state5(5);
-// AFTE_State state6(6, true);
+// AFTE_State q0;
+// AFTE_State q1;
+// AFTE_State q2;
+// AFTE_State q3;
+// AFTE_State q4;
 
-// string s = "101010";
+// q0.addLambda(&q1);
+// q1.addLambda(&q4);
+// q1.addLambda(&q2);
+// q2.addTransition('1', &q3);
+// q3.addLambda(&q1);
+
+// AFTE M(&q0, &q4);
+
+// cout << M.toString() << endl;
+
+// string s = "11111";
 // stringstream* ss = new stringstream(s);
 
-// state1.addLambda(&state2);
-// state2.addLambda(&state3);
-// state2.addLambda(&state6);
-// state3.addTransition('1', &state4);
-// state4.addTransition('0', &state5);
-// state5.addLambda(&state2);
-
-// unordered_set<AFTE_State*> conjunto = {&state1};
-
-// AFTE A;
-// A.addState(&state1);
-// unordered_set<AFTE_State*> result = A.RelationE({&state1});
-
-// cout << A.recognize(ss) << endl;
+// cout << M.recognize(ss) << endl;
