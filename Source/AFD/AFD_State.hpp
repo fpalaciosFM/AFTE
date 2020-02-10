@@ -6,12 +6,10 @@
 class AFD_State {
    public:
     int id;
-    bool final;
     unordered_set<AFTE_State*> AFTE_Equivalent;
 
     AFD_State(int id);
-    AFD_State(int id, bool final);
-    AFD_State(int id, bool final, unordered_set<AFTE_State*> conjunto);
+    AFD_State(int id, unordered_set<AFTE_State*> conjunto);
     ~AFD_State(){};
 };
 

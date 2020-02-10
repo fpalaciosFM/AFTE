@@ -15,26 +15,3 @@ class AFD {
 };
 
 #endif /* AFD_HPP */
-
-// AFD_State q1(7, true);
-// AFD_State q2(5);
-
-// AFD A;
-
-// cout << q1.id << endl;
-// cout << q1.final << endl;
-// cout << q2.id << endl;
-// cout << q2.final << endl;
-
-// A.addTransition(&q1, '0', &q2);
-// A.addTransition(&q1, '1', &q1);
-// A.addTransition(&q2, '0', &q1);
-// A.addTransition(&q2, '1', &q2);
-
-// cout << A.toString() << endl;
-
-// string s = "00";
-// stringstream* ss = new stringstream(s);
-
-// // cout << "A.read(" << s << ") = " << A.read(ss)->id << endl;
-// cout << "A.recognize('" << s << "') = " << A.recognize(ss) << endl;
