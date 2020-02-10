@@ -1,9 +1,14 @@
 #include "AFTE_State.hpp"
 
+int AFTE_State::count = 0;
+
+AFTE_State::AFTE_State() {
+    this->id = AFTE_State::count++;
+}
+
 // Se usa un identificador para fines de visualización.
 // Se usa una 'bandera' de tipo bool para saber si el estado es final.
 AFTE_State::AFTE_State(int id) {
-    this->final = false;
     this->id = id;
 }
 
@@ -35,29 +40,37 @@ unordered_set<AFTE_State*> AFTE_State::read(char c) {
     return this->transitions[c];
 }
 
-// Imprime las transiciones y las transiciones espontaneas de este estado.
-ostream& AFTE_State::print(ostream& os) {
-    cout << '{' << endl;
+// Devuelve un string con las transiciones y las transiciones espontaneas de este estado.
+string AFTE_State::toString() {
+    string s = "\tq" + to_string(this->id) + ":";
+    s += " {";
     for (auto& transition : this->transitions) {
         for (auto& state : transition.second) {
-            os << "\t" << this->id << " --('" << transition.first << "')--> " << state->id << ',' << endl;
-        }
+            s += "\n\t\t";
+            s += to_string(this->id);
+            s += " --('";
+            s += transition.first;
+            s += "')--> ";
+            s += to_string(state->id);
+            s += ",\n";
+        };
     }
     for (auto& state : this->lambdas) {
-        os << "\t" << this->id << " ---------> " << state->id << ',' << endl;
+        s += "\n\t\t";
+        s += to_string(this->id);
+        s += " ---------> ";
+        s += to_string(state->id);
+        s += ",\n";
     }
-    cout << '}';
-    return os;
+    s += "\t}";
+    return s;
 }
 
-string AFTE_State::toString() {
-    string s = "{ ";
-    for (auto& transition : this->transitions) {
-        for (auto& q : transition.second) {
-            s += "(" + to_string(this->id) + ",'" + transition.first + "'," + to_string(q->id) + ") ";
+bool isStateIn(AFTE_State* q, unordered_set<AFTE_State*> conjunto) {
+    for (auto& state : conjunto) {
+        if (q == state) {
+            return true;
         }
     }
-    for (auto& lambda : this->lambdas) {
-        s += "(" + to_string(this->id) + ",'" + to_string(lambda->id) + " ";
-    }
+    return false;
 }

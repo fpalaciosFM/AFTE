@@ -1,19 +1,11 @@
 #include "AFTE.hpp"
 
-AFTE::AFTE() {}
+AFTE::AFTE(AFTE_State* qi, AFTE_State* qf) {
+    this->initialState = qi;
+    this->finalState = qf;
+}
 
 AFTE::~AFTE() {}
-
-// Agrega un estado al AFTE.
-// Lo inserta como final si la bandera 'final' del estado es verdadera.
-// En otro caso lo inserta como inicial.
-void AFTE::addState(AFTE_State* q) {
-    if (q->final) {
-        this->finalStates.insert(q);
-    } else {
-        this->initialStates.insert(q);
-    }
-}
 
 // Relacion de transiciones
 unordered_set<AFTE_State*> AFTE::RelationR(unordered_set<AFTE_State*> conjunto, char c) {
@@ -61,11 +53,12 @@ unordered_set<AFTE_State*> AFTE::read(unordered_set<AFTE_State*> conjunto, char 
 
 // Funcion de transicion iterada.
 unordered_set<AFTE_State*> AFTE::read(stringstream* ss) {
-    unordered_set<AFTE_State*> result = this->RelationE(this->initialStates);
+    unordered_set<AFTE_State*> inputSet = {this->initialState};
+    unordered_set<AFTE_State*> result = this->RelationE(inputSet);
     char c;
 
     if (ss->good() && ss->peek() >= 0) {
-        result = this->read(this->initialStates, ss->get());
+        result = this->read(inputSet, ss->get());
     }
 
     while (ss->good() && ss->peek() >= 0) {
@@ -79,7 +72,7 @@ unordered_set<AFTE_State*> AFTE::read(stringstream* ss) {
 // Verifica si un conjunto de estados contiene un estado final.
 bool AFTE::isFinal(unordered_set<AFTE_State*> conjunto) {
     for (auto& q : conjunto) {
-        if (q->final) {
+        if (this->finalState == q) {
             return true;
         }
     }
@@ -90,4 +83,37 @@ bool AFTE::isFinal(unordered_set<AFTE_State*> conjunto) {
 bool AFTE::recognize(stringstream* ss) {
     unordered_set<AFTE_State*> result = this->read(ss);
     return this->isFinal(result);
+}
+
+// Imprime todos los estados del AFTE
+string AFTE::toString() {
+    string s = "{\n";
+    unordered_set<AFTE_State*> statesPrinted;
+    s += this->toString(this->initialState, statesPrinted);
+    s += "\n}";
+    return s;
+}
+
+// Imprime un unico estado del AFTE,
+// Despues se imprimen los estados que tengan una transicion desde el estado q.
+string AFTE::toString(AFTE_State* q, unordered_set<AFTE_State*> statesPrinted) {
+    string s;
+    if (isStateIn(q, statesPrinted)) {
+        return s;
+    }
+
+    s += q->toString() + ",\n";
+    statesPrinted.insert(q);
+
+    for (auto& p : q->transitions) {
+        for (auto& r : p.second) {
+            s += this->toString(r, statesPrinted);
+        }
+    }
+
+    for (auto& p : q->lambdas) {
+        s += this->toString(p, statesPrinted);
+    }
+
+    return s;
 }
