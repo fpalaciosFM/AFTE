@@ -10,25 +10,23 @@ using namespace std;
 
 class AFTE {
    public:
-    unordered_set<AFTE_State*> initialStates;
-    unordered_set<AFTE_State*> finalStates;
+    AFTE_State* initialState;
+    AFTE_State* finalState;
 
-    AFTE();
+    AFTE(AFTE_State* qi, AFTE_State* qf);
     ~AFTE();
-
-    void addState(AFTE_State* q);
-
-    //    private:
     unordered_set<AFTE_State*> RelationR(unordered_set<AFTE_State*> conjunto, char c);
     unordered_set<AFTE_State*> RelationE(unordered_set<AFTE_State*> conjunto);
     unordered_set<AFTE_State*> read(unordered_set<AFTE_State*>, char c);
     unordered_set<AFTE_State*> read(stringstream* ss);
     bool isFinal(unordered_set<AFTE_State*> conjunto);
     bool recognize(stringstream* ss);
+    // string toString(AFTE_State* q, unordered_set<AFTE_State*>* statesPrinted);
+    string toString();
+    string toString(AFTE_State*, unordered_set<AFTE_State*>);
 };
 
 #endif /* AFTE_HPP */
-
 
 // AFTE_State state1(1);
 // AFTE_State state2(2);

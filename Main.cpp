@@ -61,29 +61,21 @@ int main() {
     // cout << "\\\\" << endl;
     // cout << exp.AfteLatex();
 
-    AFD_State q1(7, true);
-    AFD_State q2(5);
+    AFTE_State q0;
+    AFTE_State q1;
+    AFTE_State q2;
+    AFTE_State q3;
+    AFTE_State q4;
 
-    AFD A;
+    q0.addLambda(&q1);
+    q1.addLambda(&q4);
+    q1.addLambda(&q2);
+    q2.addTransition('1', &q3);
+    q3.addLambda(&q1);
 
-    cout << q1.id << endl;
-    cout << q1.final << endl;
-    cout << q2.id << endl;
-    cout << q2.final << endl;
+    AFTE M(&q0, &q4);
 
-    A.addTransition(&q1, '0', &q2);
-    A.addTransition(&q1, '1', &q1);
-    A.addTransition(&q2, '0', &q1);
-    A.addTransition(&q2, '1', &q2);
+    cout << M.toString() << endl;
 
-    cout << A.toString() << endl;
-
-    string s = "00";
-    stringstream* ss = new stringstream(s);
-
-    // cout << "A.read(" << s << ") = " << A.read(ss)->id << endl;
-    cout << "A.recognize(" << s << ") = " << A.recognize(ss) << endl;
-
-    printf("Todo Bien.\n");
     return 0;
 }

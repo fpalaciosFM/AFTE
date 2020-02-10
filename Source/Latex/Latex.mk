@@ -1,1 +1,0 @@
-Latex.o : Latex.hpp

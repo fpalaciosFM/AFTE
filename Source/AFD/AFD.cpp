@@ -12,7 +12,6 @@ void AFD::addTransition(AFD_State* q, char c, AFD_State* p) {
         this->finalStates.insert(q);
     }
 
-    // ¿Sera posible simplificar las siguientes lineas?
     if (this->transitions.find(q) == this->transitions.end()) {
         this->transitions.insert({q, map_insert});
     } else {
