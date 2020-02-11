@@ -1,74 +1,85 @@
 #include "AFD.hpp"
 
-void AFD::addTransition(AFD_State* q, char c, AFD_State* p) {
-    unordered_map<char, AFD_State*> map_insert;
-    map_insert.insert({c, p});
+AFD::AFD(AFTE M) : AFD() {
+    unordered_set<AFTE_State*> inputSet = M.RelationE({M.initialState});
+    AFD_State* newInitialState = new AFD_State(inputSet);
+    this->initialState = newInitialState;
 
-    if (this->transitions.empty()) {
-        this->initialState = q;
-    }
+    this->makeTransitions(newInitialState, M);
+    // for (auto& sigma : this->Sigma) {
+    //     inputSet = M.read(*this->initialState->AFTE_Equivalent, sigma);
+    //     newState = new AFD_State(inputSet);
+    // }
+}
 
-    if (q->final) {
+void AFD::addState(AFD_State* q, AFTE M) {
+    this->states.insert(q);
+    if (M.isFinal(*q->AFTE_Equivalent)) {
         this->finalStates.insert(q);
     }
+}
 
-    if (this->transitions.find(q) == this->transitions.end()) {
-        this->transitions.insert({q, map_insert});
-    } else {
-        if (this->transitions[q].find(c) == this->transitions[q].end()) {
-            this->transitions[q].insert({c, p});
-        } else {
-            this->transitions[q][c] = p;
+void AFD::makeTransitions(AFD_State* q, AFTE M) {
+    if (isStateIn(q, this->states)) {
+        return;
+    }
+
+    this->addState(q, M);
+    // this->states.insert(q);
+
+    unordered_set<AFTE_State*> inputSet;
+    AFD_State* newState;
+    unordered_map<char, AFD_State*> newTransitions;
+
+    for (auto& sigma : this->Sigma) {
+        inputSet = M.read(*q->AFTE_Equivalent, sigma);
+        newState = new AFD_State(inputSet);
+        newState = this->findEquivalent(newState);
+        newTransitions.insert({{sigma, newState}});
+        this->makeTransitions(newState, M);
+    }
+
+    this->transitions.insert({{q, newTransitions}});
+}
+
+AFD_State* AFD::findEquivalent(AFD_State* q) {
+    bool flag = false;
+    for (auto& x : this->states) {
+        if (*x->AFTE_Equivalent == *q->AFTE_Equivalent) {
+            return x;
         }
     }
+    return q;
 }
 
 string AFD::toString() {
     string s = "{\n";
-    for (auto& elem : this->transitions) {
-        for (auto& subelem : elem.second) {
-            s += "  f(";
-            s += to_string(elem.first->id);
-            s += ",\'";
-            s += subelem.first;
-            s += "\')=";
-            s += to_string(subelem.second->id);
+    s += " states:{ ";
+    for (auto& q : this->states) {
+        s += "q" + to_string(q->id) + " ";
+    }
+    s += "},\n";
 
-            if (this->initialState == elem.first) {
-                s += "  State ";
-                s += to_string(elem.first->id);
-                s += " is initial.";
-            }
+    s += " initialState: q" + to_string(this->initialState->id) + ",\n";
 
-            if (elem.first->final) {
-                s += "  State ";
-                s += to_string(elem.first->id);
-                s += " is final.";
-            }
+    s += " finalStates:{ ";
+    for (auto& q : this->finalStates) {
+        s += "q" + to_string(q->id) + " ";
+    }
+    s += "},\n";
 
-            s += '\n';
+    s += " tranditions:{\n";
+    for (auto& transition : this->transitions) {
+        s += "\t" + to_string(transition.first->id);
+        for (auto& c : transition.second) {
+            s += "\t'";
+            s += c.first;
+            s += "':" + to_string(c.second->id);
         }
+        s += "\n";
     }
-    s += '}';
+    s += " }";
 
+    s += "}";
     return s;
-}
-
-AFD_State* AFD::read(stringstream* ss) {
-    AFD_State* state_i = this->initialState;
-    char c;
-    int i = 0;
-
-    while (ss->good() && ss->peek() >= 0) {
-        c = ss->get();
-        i++;
-        state_i = this->transitions[state_i][c];
-    }
-
-    return state_i;
-}
-
-bool AFD::recognize(stringstream* ss) {
-    AFD_State* result = this->read(ss);
-    return result->final;
 }

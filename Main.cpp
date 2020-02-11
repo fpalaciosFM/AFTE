@@ -61,21 +61,28 @@ int main() {
     // cout << "\\\\" << endl;
     // cout << exp.AfteLatex();
 
-    AFTE_State q0;
-    AFTE_State q1;
-    AFTE_State q2;
-    AFTE_State q3;
-    AFTE_State q4;
+    AFTE_State q[5];
 
-    q0.addLambda(&q1);
-    q1.addLambda(&q4);
-    q1.addLambda(&q2);
-    q2.addTransition('1', &q3);
-    q3.addLambda(&q1);
+    q[0].addLambda(&q[1]);
+    q[1].addLambda(&q[2]);
+    q[1].addLambda(&q[4]);
+    q[2].addTransition('1', &q[3]);
+    q[3].addLambda(&q[1]);
 
-    AFTE M(&q0, &q4);
+    AFTE M(&q[0], &q[4]);
 
-    cout << M.toString() << endl;
+    // cout << M.toString() << endl;
+
+    string s = "11111";
+    stringstream* ss = new stringstream(s);
+
+    AFD D(M);
+
+    cout << D.toString() << endl;
+
+    cout << endl
+         << "Todo Bien."
+         << endl;
 
     return 0;
 }
