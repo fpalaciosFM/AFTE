@@ -26,5 +26,7 @@ class AFTE_State {
 };
 
 bool isStateIn(AFTE_State* q, unordered_set<AFTE_State*> conjunto);
+// bool areEquivalent(unordered_set<AFTE_State*> c1, unordered_set<AFTE_State*> c2);
+string toString(unordered_set<AFTE_State*> qs);
 
 #endif /* AFTE_STATE_HPP */

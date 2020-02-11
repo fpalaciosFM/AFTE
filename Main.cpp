@@ -61,25 +61,30 @@ int main() {
     // cout << "\\\\" << endl;
     // cout << exp.AfteLatex();
 
-    AFTE_State* q[5];
-    for (int i = 0; i < 5; i++) {
-        q[i] = new AFTE_State();
-    }
+    AFTE_State q[5];
 
-    q[0]->addLambda(q[1]);
-    q[1]->addLambda(q[4]);
-    q[1]->addLambda(q[2]);
-    q[2]->addTransition('1', q[3]);
-    q[3]->addLambda(q[1]);
+    q[0].addLambda(&q[1]);
+    q[1].addLambda(&q[2]);
+    q[1].addLambda(&q[4]);
+    q[2].addTransition('1', &q[3]);
+    q[3].addLambda(&q[1]);
 
-    AFTE M(q[0], q[4]);
+    AFTE M(&q[0], &q[4]);
 
-    cout << M.toString() << endl;
+    // cout << M.toString() << endl;
 
     string s = "11111";
     stringstream* ss = new stringstream(s);
 
-    cout << M.recognize(ss) << endl;
+    AFD D(M);
 
+    cout << D.toString() << endl;
+
+    cout << "Todo Bien."
+         << endl;
+
+    unordered_set<AFTE_State*> c1 = {&q[0]};
+    unordered_set<AFTE_State*> c2 = {&q[0]};
+	cout << (c1 == c2) << endl;
     return 0;
 }

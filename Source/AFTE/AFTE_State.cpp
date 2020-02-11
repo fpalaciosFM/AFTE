@@ -77,3 +77,32 @@ bool isStateIn(AFTE_State* q, unordered_set<AFTE_State*> conjunto) {
     }
     return false;
 }
+
+string toString(unordered_set<AFTE_State*> qs) {
+    string s = "{ ";
+    for (auto& x : qs) {
+        s += to_string(x->id) + " ";
+    }
+    s += "}";
+    return s;
+}
+
+// bool areEquivalent(unordered_set<AFTE_State*> c1, unordered_set<AFTE_State*> c2) {
+//     if (c1.size() != c2.size()) {
+//         return false;
+//     }
+//     bool flag;
+//     for (auto& x : c1) {
+//         flag = false;
+//         for (auto& y : c2) {
+//             if (x == y) {
+//                 flag = true;
+//                 break;
+//             }
+//         }
+//         if (!flag) {
+//             break;
+//         }
+//     }
+//     return flag;
+// }
