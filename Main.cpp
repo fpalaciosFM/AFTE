@@ -80,11 +80,9 @@ int main() {
 
     cout << D.toString() << endl;
 
-    cout << "Todo Bien."
+    cout << endl
+         << "Todo Bien."
          << endl;
 
-    unordered_set<AFTE_State*> c1 = {&q[0]};
-    unordered_set<AFTE_State*> c2 = {&q[0]};
-	cout << (c1 == c2) << endl;
     return 0;
 }

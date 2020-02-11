@@ -5,50 +5,41 @@ AFD::AFD(AFTE M) : AFD() {
     AFD_State* newInitialState = new AFD_State(inputSet);
     this->initialState = newInitialState;
 
-    this->states.insert(newInitialState);
-    AFD_State* newState;
-
-    this->addTransitions(newState, M);
+    this->makeTransitions(newInitialState, M);
     // for (auto& sigma : this->Sigma) {
     //     inputSet = M.read(*this->initialState->AFTE_Equivalent, sigma);
     //     newState = new AFD_State(inputSet);
     // }
 }
 
-string AFD::toString() {
-    string s = "{\n";
-    s += " initialState: q" + to_string(this->initialState->id) + ",\n";
-    // s += " finalState: q" + to_string(this->finalState->id) + ",\n";
-    s += " states:{ ";
-    for (auto& q : this->states) {
-        s += "q" + to_string(q->id) + " ";
+void AFD::addState(AFD_State* q, AFTE M) {
+    this->states.insert(q);
+    if (M.isFinal(*q->AFTE_Equivalent)) {
+        this->finalStates.insert(q);
     }
-    s += "}\n";
-    return s;
 }
 
-void AFD::addTransitions(AFD_State* q, AFTE M) {
+void AFD::makeTransitions(AFD_State* q, AFTE M) {
     if (isStateIn(q, this->states)) {
         return;
     }
 
+    this->addState(q, M);
+    // this->states.insert(q);
+
     unordered_set<AFTE_State*> inputSet;
     AFD_State* newState;
-    unordered_map<char, AFD_State*> newTransition;
+    unordered_map<char, AFD_State*> newTransitions;
 
     for (auto& sigma : this->Sigma) {
-        cout << endl
-             << "iterando para " << sigma << endl;
-        inputSet = M.read(*this->initialState->AFTE_Equivalent, sigma);
+        inputSet = M.read(*q->AFTE_Equivalent, sigma);
         newState = new AFD_State(inputSet);
         newState = this->findEquivalent(newState);
-        this->states.insert(newState);
-        newTransition.insert({{sigma, newState}});
-        cout << "new id:" << to_string(newState->id) << endl;
+        newTransitions.insert({{sigma, newState}});
+        this->makeTransitions(newState, M);
     }
 
-    // AFD_State* aux_q = getStateFrom(q, this->states);
-    // q = aux_q ? aux_q : q;
+    this->transitions.insert({{q, newTransitions}});
 }
 
 AFD_State* AFD::findEquivalent(AFD_State* q) {
@@ -59,4 +50,36 @@ AFD_State* AFD::findEquivalent(AFD_State* q) {
         }
     }
     return q;
+}
+
+string AFD::toString() {
+    string s = "{\n";
+    s += " states:{ ";
+    for (auto& q : this->states) {
+        s += "q" + to_string(q->id) + " ";
+    }
+    s += "},\n";
+
+    s += " initialState: q" + to_string(this->initialState->id) + ",\n";
+
+    s += " finalStates:{ ";
+    for (auto& q : this->finalStates) {
+        s += "q" + to_string(q->id) + " ";
+    }
+    s += "},\n";
+
+    s += " tranditions:{\n";
+    for (auto& transition : this->transitions) {
+        s += "\t" + to_string(transition.first->id);
+        for (auto& c : transition.second) {
+            s += "\t'";
+            s += c.first;
+            s += "':" + to_string(c.second->id);
+        }
+        s += "\n";
+    }
+    s += " }";
+
+    s += "}";
+    return s;
 }

@@ -33,6 +33,5 @@ AFD_State* getStateFrom(AFD_State* q, unordered_set<AFD_State*> conjunto) {
 }
 
 bool AFD_State::isEquivalent(AFD_State* q) {
-    cout << "Entrando a isEquivalent" << endl;
     return *q->AFTE_Equivalent == *this->AFTE_Equivalent;
 }
