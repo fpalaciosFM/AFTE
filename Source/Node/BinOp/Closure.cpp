@@ -69,3 +69,17 @@ Node* Closure::Simp(void) const {
 
     return new Closure(l);
 };
+
+AFTE Closure::toAFTE() {
+    AFTE_State* q0 = new AFTE_State();
+    AFTE_State* q1 = new AFTE_State();
+    AFTE M1 = this->left->toAFTE();
+    AFTE_State* qf = new AFTE_State();
+
+    q0->addLambda(q1);
+    q1->addLambda(M1.initialState);
+    q1->addLambda(qf);
+    M1.finalState->addLambda(q1);
+
+    return AFTE(q0, qf);
+}

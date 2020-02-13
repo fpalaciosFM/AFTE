@@ -6,28 +6,6 @@ Union::Union(Node* l, Node* r) : BinOp(l, r) {
 
 Union::~Union(void) {}
 
-void Union::AfteLatex(State& qi, State& qf, double x, double y, int& count, string& s, string& e) {
-    State ai(count++), af(count++), bi(count++), bf(count++);
-    qi.setPos(x, y + right->height);
-    qf.setPos(x + width - N, y + right->height);
-    s += qi.toLatex();
-    s += qf.toLatex();
-    e += qi.toLatex(ai);
-    e += qi.toLatex(bi);
-    e += af.toLatex(qf);
-    e += bf.toLatex(qf);
-
-    left->AfteLatex(ai, af, x + (width - left->width) / 2, y + right->height + N, count, s, e);
-    right->AfteLatex(bi, bf, x + (width - right->width) / 2, y, count, s, e);
-}
-
-void Union::initDims() {
-    left->initDims();
-    right->initDims();
-    this->height = left->height + right->height + N;
-    this->width = 2 * N + 2 * E + max(left->width, right->width);
-}
-
 int Union::Type(void) const {
     return UNION;
 }
@@ -69,4 +47,40 @@ Node* Union::Simp(void) const {
     }
 
     return new Union(l, r);
+}
+
+void Union::AfteLatex(State& qi, State& qf, double x, double y, int& count, string& s, string& e) {
+    State ai(count++), af(count++), bi(count++), bf(count++);
+    qi.setPos(x, y + right->height);
+    qf.setPos(x + width - N, y + right->height);
+    s += qi.toLatex();
+    s += qf.toLatex();
+    e += qi.toLatex(ai);
+    e += qi.toLatex(bi);
+    e += af.toLatex(qf);
+    e += bf.toLatex(qf);
+
+    left->AfteLatex(ai, af, x + (width - left->width) / 2, y + right->height + N, count, s, e);
+    right->AfteLatex(bi, bf, x + (width - right->width) / 2, y, count, s, e);
+}
+
+void Union::initDims() {
+    left->initDims();
+    right->initDims();
+    this->height = left->height + right->height + N;
+    this->width = 2 * N + 2 * E + max(left->width, right->width);
+}
+
+AFTE Union::toAFTE() {
+    AFTE_State* q0 = new AFTE_State();
+    AFTE_State* qf = new AFTE_State();
+    AFTE M1 = this->left->toAFTE();
+    AFTE M2 = this->right->toAFTE();
+
+    q0->addLambda(M1.initialState);
+    q0->addLambda(M2.initialState);
+    M1.finalState->addLambda(qf);
+    M2.finalState->addLambda(qf);
+
+    return AFTE(q0, qf);
 }

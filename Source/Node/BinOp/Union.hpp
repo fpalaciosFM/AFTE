@@ -14,9 +14,12 @@ class Union : public BinOp {
 
     // AFTE Latex Printing
     virtual void initDims();
-    
+
     //AFTE Latex Printing
     virtual void AfteLatex(State& qi, State& qf, double x, double y, int& count, string& s, string& e);
+
+    // AFTE Conversion
+    virtual AFTE toAFTE();
 };
 
 #endif /* UNION_HPP */
