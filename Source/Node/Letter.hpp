@@ -1,6 +1,7 @@
 #ifndef LETTER_HPP
 #define LETTER_HPP
 
+#include "../AFTE/AFTE.hpp"
 #include "Node.hpp"
 
 class Letter : public Node {
@@ -15,8 +16,11 @@ class Letter : public Node {
     virtual Node* Simp(void) const;
     virtual ostream& Print(ostream& os) const;
 
-    //AFTE Latex Printing
+    // AFTE Latex Printing
     virtual void AfteLatex(State& qi, State& qf, double x, double y, int& count, string& s, string& e);
+
+    // AFTE Conversion
+    virtual AFTE toAFTE();
 };
 
 #endif /* LETTER_HPP */

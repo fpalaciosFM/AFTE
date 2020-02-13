@@ -2,9 +2,10 @@
 #define NODE_HPP
 
 #include <iostream>
+#include "../AFTE/AFTE.hpp"
+#include "../Latex/Latex.hpp"
 #include "../Misc/Misc.hpp"
 #include "../Misc/State.hpp"
-#include "../Latex/Latex.hpp"
 
 using namespace std;
 
@@ -43,6 +44,9 @@ class Node {
     virtual void initDims();
     virtual string AfteLatex();
     virtual void AfteLatex(State& qi, State& qf, double x, double y, int& count, string& s, string& e);
+
+    // AFTE Conversion
+    virtual AFTE toAFTE();
 };
 
 void tabs(string& s, int k);
