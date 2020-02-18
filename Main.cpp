@@ -39,9 +39,17 @@ int main() {
     // cout << exp.AfteLatex();
     cout << "Hola" << endl;
     AFTE M = exp.toAFTE();
+    AFTE_State::count = 0;
+    AFTE N = exp.toAFTE();
     cout << M.initialState->id << endl;
     cout << M.finalState->id << endl;
     cout << M.toString() << endl;
+    cout << N.initialState->id << endl;
+    cout << N.finalState->id << endl;
+    cout << N.toString() << endl;
+
+    cout << endl
+         << exp.AfteLatex() << endl;
 
     cout << endl
          << "Todo Bien."

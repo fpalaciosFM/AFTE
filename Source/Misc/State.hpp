@@ -9,7 +9,8 @@ using namespace std;
 
 class State {
    public:
-    std::string extra;
+    static int count;
+    string extra;
     int index;
     double x;
     double y;
@@ -18,10 +19,10 @@ class State {
     State(int i, std::string extra);
     ~State();
 
-    std::string toLatex();
-    std::string toLatex(State q);
-    std::string toLatexClosure(State q, int out, int in);
-    std::string toLatex(std::string sigma, State q);
+    string toLatex();
+    string toLatex(State q);
+    string toLatexClosure(State q, int out, int in);
+    string toLatex(std::string sigma, State q);
     void setPos(double, double);
     void setIndex(int i);
 };
