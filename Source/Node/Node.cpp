@@ -13,7 +13,7 @@ string Node::AfteLatex() {
     State qi(0, "initial"), qf(1, "accepting");
     int count = 2;
     AfteLatex(qi, qf, 0, 0, count, s, e);
-    
+
     tikz += "\\begin{tikzpicture}[initial text = $M$]\n";
     tikz += s;
     tikz += "\\path[->]\n";
@@ -46,4 +46,9 @@ void tabs(string& s, int k) {
     for (int i = 0; i < k; i++) {
         s += '\t';
     }
+}
+
+AFTEL Node::toAFTEL() {
+    this->initDims();
+    return this->toAFTEL(0, 0);
 }

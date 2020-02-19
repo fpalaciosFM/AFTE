@@ -82,3 +82,7 @@ AFTE Concatenation::toAFTE() {
     M1.finalState->addLambda(M2.initialState);
     return AFTE(M1.initialState, M2.finalState);
 }
+
+AFTEL Concatenation::toAFTEL(double x, double y) {
+    cout << "Por implementar 'Concatenation::toAFTEL'" << endl;
+}

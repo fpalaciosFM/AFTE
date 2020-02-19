@@ -21,6 +21,9 @@ class Letter : public Node {
 
     // AFTE Conversion
     virtual AFTE toAFTE();
+
+    // AFTEL Conversion
+    virtual AFTEL toAFTEL(double x, double y);
 };
 
 #endif /* LETTER_HPP */

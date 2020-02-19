@@ -39,3 +39,10 @@ AFTE Letter::toAFTE() {
     q0->addTransition(this->ch, qf);
     return AFTE(q0, qf);
 }
+
+AFTEL Letter::toAFTEL(double x, double y) {
+    AFTEL_State* qi = new AFTEL_State(x, y);
+    AFTEL_State* qf = new AFTEL_State(x + N + E, y);
+    qi->addTransition(this->ch, qf);
+    return AFTEL(qi, qf);
+}

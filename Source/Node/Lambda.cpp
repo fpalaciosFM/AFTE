@@ -36,3 +36,10 @@ AFTE Lambda::toAFTE() {
     q0->addLambda(qf);
     return AFTE(q0, qf);
 }
+
+AFTEL Lambda::toAFTEL(double x, double y) {
+    AFTEL_State* qi = new AFTEL_State(x, y);
+    AFTEL_State* qf = new AFTEL_State(x + N + E, y);
+    qi->addLambda(qf);
+    return AFTEL(qi, qf);
+}

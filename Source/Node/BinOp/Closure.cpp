@@ -83,3 +83,7 @@ AFTE Closure::toAFTE() {
 
     return AFTE(q0, qf);
 }
+
+AFTEL Closure::toAFTEL(double x, double y) {
+    cout << "Por implementar 'Closure::toAFTEL'" << endl;
+}

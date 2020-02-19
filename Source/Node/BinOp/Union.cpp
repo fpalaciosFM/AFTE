@@ -84,3 +84,7 @@ AFTE Union::toAFTE() {
 
     return AFTE(q0, qf);
 }
+
+AFTEL Union::toAFTEL(double x, double y) {
+    cout << "Por implementar 'Union::toAFTEL'" << endl;
+}
