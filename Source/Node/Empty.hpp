@@ -17,6 +17,9 @@ class Empty : public Node {
 
     // AFTE Conversion
     virtual AFTE toAFTE();
+
+    // AFTEL Conversion
+    virtual AFTEL toAFTEL(double x, double y);
 };
 
 #endif /* EMPTY_HPP */

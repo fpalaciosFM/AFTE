@@ -1,5 +1,7 @@
 #include "State.hpp"
 
+int State::count = 0;
+
 State::State(int i) {
     this->index = i;
 }
@@ -37,9 +39,9 @@ std::string State::toLatex(std::string sigma, State q) {
     return s;
 }
 
-std::string State::toLatexClosure(State q, int out, int in){
+std::string State::toLatexClosure(State q, int out, int in) {
     std::string s;
-    s = "(" + std::to_string(index) + ") edge[out=" + std::to_string(out) + ", in=" + std::to_string(in) + "] (" + std::to_string(q.index) + ")" ;
+    s = "(" + std::to_string(index) + ") edge[out=" + std::to_string(out) + ", in=" + std::to_string(in) + "] (" + std::to_string(q.index) + ")";
     return s;
 }
 

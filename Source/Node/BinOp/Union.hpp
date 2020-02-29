@@ -20,6 +20,9 @@ class Union : public BinOp {
 
     // AFTE Conversion
     virtual AFTE toAFTE();
+
+    // AFTEL Conversion
+    virtual AFTEL toAFTEL(double x, double y);
 };
 
 #endif /* UNION_HPP */

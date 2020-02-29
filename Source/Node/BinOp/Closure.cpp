@@ -83,3 +83,15 @@ AFTE Closure::toAFTE() {
 
     return AFTE(q0, qf);
 }
+
+AFTEL Closure::toAFTEL(double x, double y) {
+    AFTEL_State* qi = new AFTEL_State(x, y);
+    AFTEL_State* qa = new AFTEL_State(x + (width - N) / 2, y);
+    AFTEL M = left->toAFTEL(x + (width - left->width) / 2, y + height - left->height);
+    AFTEL_State* qf = new AFTEL_State(x + width - N, y);
+    qi->addLambda(qa);
+    qa->addLambda(M.initialState);
+    M.finalState->addLambda(qa);
+    qa->addLambda(qf);
+    return AFTEL(qi, qf);
+}

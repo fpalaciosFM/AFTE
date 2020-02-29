@@ -82,3 +82,10 @@ AFTE Concatenation::toAFTE() {
     M1.finalState->addLambda(M2.initialState);
     return AFTE(M1.initialState, M2.finalState);
 }
+
+AFTEL Concatenation::toAFTEL(double x, double y) {
+    AFTEL M1 = left->toAFTEL(x, y + (height - left->height) / 2);
+    AFTEL M2 = right->toAFTEL(x + left->width + E, y + (height - right->height) / 2);
+    M1.finalState->addLambda(M2.initialState);
+    return AFTEL(M1.initialState, M2.finalState);
+}

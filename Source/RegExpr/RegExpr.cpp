@@ -95,3 +95,7 @@ string RegExpr::AfteLatex() {
 AFTE RegExpr::toAFTE() {
     return ptr->toAFTE();
 }
+
+AFTEL RegExpr::toAFTEL() {
+    return ptr->toAFTEL();
+}

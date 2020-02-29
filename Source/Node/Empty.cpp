@@ -35,3 +35,9 @@ AFTE Empty::toAFTE() {
     AFTE M(q0, qf);
     return M;
 }
+
+AFTEL Empty::toAFTEL(double x, double y) {
+    AFTEL_State* qi = new AFTEL_State(x, y);
+    AFTEL_State* qf = new AFTEL_State(x + N + E, y);
+    return AFTEL(qi, qf);
+}

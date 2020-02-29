@@ -17,6 +17,9 @@ class Lambda : public Node {
 
     // AFTE Conversion
     virtual AFTE toAFTE();
+
+    // AFTEL Conversion
+    virtual AFTEL toAFTEL(double x, double y);
 };
 
 #endif /* LAMBDA_HPP */

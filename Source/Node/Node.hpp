@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "../AFTE/AFTE.hpp"
+#include "../AFTE_Latex/AFTEL.hpp"
 #include "../Latex/Latex.hpp"
 #include "../Misc/Misc.hpp"
 #include "../Misc/State.hpp"
@@ -47,8 +48,13 @@ class Node {
 
     // AFTE Conversion
     virtual AFTE toAFTE();
+
+    // AFTEL Concersion
+    virtual AFTEL toAFTEL();
+    virtual AFTEL toAFTEL(double x, double y);
 };
 
 void tabs(string& s, int k);
+int max(int a, int b);
 
 #endif /* NODE_HPP */
