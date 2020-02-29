@@ -50,9 +50,11 @@ class Node {
     virtual AFTE toAFTE();
 
     // AFTEL Concersion
+    virtual AFTEL toAFTEL();
     virtual AFTEL toAFTEL(double x, double y);
 };
 
 void tabs(string& s, int k);
+int max(int a, int b);
 
 #endif /* NODE_HPP */

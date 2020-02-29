@@ -86,5 +86,13 @@ AFTE Union::toAFTE() {
 }
 
 AFTEL Union::toAFTEL(double x, double y) {
-    cout << "Por implementar 'Union::toAFTEL'" << endl;
+    AFTEL_State* qi = new AFTEL_State(x, y + left->height);
+    AFTEL M1 = left->toAFTEL(x + (width - left->width) / 2, y);
+    AFTEL M2 = right->toAFTEL(x + (width - right->width) / 2, y + left->height + N);
+    AFTEL_State* qf = new AFTEL_State(x + width - N, y + left->height);
+    qi->addLambda(M1.initialState);
+    qi->addLambda(M2.initialState);
+    M1.finalState->addLambda(qf);
+    M2.finalState->addLambda(qf);
+    return AFTEL(qi, qf);
 }

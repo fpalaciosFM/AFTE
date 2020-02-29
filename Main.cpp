@@ -33,26 +33,36 @@ int main() {
     //      << endl;
 
     RegExpr exp;
+    cout << "Ingrese una expresion regular: ";
     cin >> exp;
     // cout << exp.printTree();
     // cout << "\\\\" << endl;
     // cout << exp.AfteLatex();
-    cout << "Hola" << endl;
-    AFTE M = exp.toAFTE();
-    AFTE_State::count = 0;
-    AFTE N = exp.toAFTE();
-    cout << M.initialState->id << endl;
-    cout << M.finalState->id << endl;
-    cout << M.toString() << endl;
-    cout << N.initialState->id << endl;
-    cout << N.finalState->id << endl;
-    cout << N.toString() << endl;
+    // AFTE M = exp.toAFTE();
+    // cout << "Initial State: " << M.initialState->id << endl;
+    // cout << "Final State: " << M.finalState->id << endl;
+    // cout << M.toString() << endl;
+
+    // cout << endl
+    //      << exp.AfteLatex() << endl;
+
+    // cout << endl
+    //      << "Todo Bien."
+    //      << endl
+    //      << endl;
+
+    AFTEL ML = exp.toAFTEL();
 
     cout << endl
-         << exp.AfteLatex() << endl;
+         << "AFTEL:" << endl;
+    cout << "Initial State: " << ML.initialState->id << endl;
+    cout << "Final State: " << ML.finalState->id << endl;
+    cout << ML.toDiagram() << endl;
+    cout << exp.printTree() << endl;
 
     cout << endl
          << "Todo Bien."
+         << endl
          << endl;
 
     return 0;

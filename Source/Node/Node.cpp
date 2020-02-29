@@ -48,7 +48,16 @@ void tabs(string& s, int k) {
     }
 }
 
+AFTE Node::toAFTE() {}
+
 AFTEL Node::toAFTEL() {
     this->initDims();
-    return this->toAFTEL(0, 0);
+    return this->toAFTEL(0., 0.);
+}
+
+AFTEL Node::toAFTEL(double x, double y) {
+}
+
+int max(int a, int b) {
+    return a > b ? a : b;
 }

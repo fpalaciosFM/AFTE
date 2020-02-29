@@ -3,15 +3,15 @@
 // count se utiliza para no tener que darle nombre a cada estado, se genera automaticamente
 int AFTEL_State::count = 0;
 
-// Constructor que asigna el identificador
-AFTEL_State::AFTEL_State() {
-    this->id = AFTEL_State::count++;
-}
-
 // Constructor con las coordenadas del estado para su impresion en LaTeX.
-AFTEL_State::AFTEL_State(double x, double y) : AFTEL_State() {
+AFTEL_State::AFTEL_State(double x, double y) {
+    this->id = AFTEL_State::count++;
     this->x = x;
     this->y = y;
+}
+
+// Constructor que asigna el identificador
+AFTEL_State::AFTEL_State() : AFTEL_State(0, 0) {
 }
 
 AFTEL_State::~AFTEL_State() {}

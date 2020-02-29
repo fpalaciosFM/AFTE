@@ -22,6 +22,7 @@ class RegExpr {
     string printTree();
     string AfteLatex();
     AFTE toAFTE();
+    AFTEL toAFTEL();
 };
 
 void PrintMat(RegExpr** A, int N);

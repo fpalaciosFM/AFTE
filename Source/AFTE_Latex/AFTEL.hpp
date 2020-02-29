@@ -11,7 +11,8 @@ using namespace std;
 class AFTEL {
    public:
     // AFTE Attributes
-    unordered_set<char> Sigma;
+    // unordered_set<char> Sigma;
+    // unordered_set<AFTEL_State*> states;
     AFTEL_State* initialState;
     AFTEL_State* finalState;
 
@@ -29,6 +30,8 @@ class AFTEL {
     string toString(AFTEL_State*, unordered_set<AFTEL_State*>);
 
     // Latex Methods
+    string toDiagram();
+    void toDiagram(AFTEL_State*, unordered_set<AFTEL_State*>*, string* nodes, string* edges);
 };
 
 #endif /* AFTE_LATEX_HPP */

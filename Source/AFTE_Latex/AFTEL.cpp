@@ -125,3 +125,58 @@ string AFTEL::toString(AFTEL_State* q, unordered_set<AFTEL_State*> statesPrinted
 // *******************
 // ** Latex Methods **
 // *******************
+
+string AFTEL::toDiagram() {
+    string diagram, nodes, edges;
+    unordered_set<AFTEL_State*> states_inserted;
+
+    toDiagram(this->initialState, &states_inserted, &nodes, &edges);
+
+    diagram += "\\begin{tikzpicture}[initial text = $M$]\n";
+    diagram += nodes;
+    diagram += "\\path[->]\n";
+    diagram += edges;
+    diagram += ";\n";
+    diagram += "\\end{tikzpicture}";
+
+    return diagram;
+}
+
+void AFTEL::toDiagram(AFTEL_State* q, unordered_set<AFTEL_State*>* states_inserted, string* nodes, string* edges) {
+    if (isStateIn(q, *states_inserted)) {
+        return;
+    }
+    states_inserted->insert(q);
+
+    *nodes += "\t\\node[state";
+
+    if (q == this->initialState) {
+        *nodes += ",initial";
+    }
+
+    if (q == this->finalState) {
+        *nodes += ",accepting";
+    }
+
+    *nodes += "] (" + to_string(q->id) + ") at (" + to_string(q->x) + "," + to_string(q->y) + ") {$q_{" + to_string(q->id) + "}$};\n";
+    for (auto p : q->lambdas) {
+        toDiagram(p, states_inserted, nodes, edges);
+        *edges += "\t(" + to_string(q->id) + ") edge";
+
+        if (q->x - p->x > 0) {
+            if (q->y - p->y < 0) {
+                *edges += "[out=150,in=-90]";
+            } else {
+                *edges += "[out=-90,in=30]";
+            }
+        }
+
+        *edges += " (" + to_string(p->id) + ")\n";
+    }
+    for (auto x : q->transitions) {
+        for (auto y : x.second) {
+            toDiagram(y, states_inserted, nodes, edges);
+            *edges += "\t(" + to_string(q->id) + ") edge[above] node{$" + x.first + "$} (" + to_string(y->id) + ")\n";
+        }
+    }
+}
