@@ -1,6 +1,7 @@
 #ifndef AFD_HPP
 #define AFD_HPP
 
+#include "../AFTE_Latex/AFTEL.hpp"
 #include "AFD_State.hpp"
 
 class AFD {
@@ -13,6 +14,7 @@ class AFD {
 
     AFD(){};
     AFD(AFTE);
+    AFD(AFTEL);
     ~AFD(){};
 
     void makeTransitions(AFD_State*, AFTE M);

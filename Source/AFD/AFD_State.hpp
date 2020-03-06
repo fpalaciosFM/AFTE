@@ -2,6 +2,7 @@
 #define AFD_STATE_HPP
 
 #include "../AFTE/AFTE.hpp"
+#include "../AFTE_Latex/AFTEL.hpp"
 
 class AFD_State {
    public:
@@ -11,6 +12,7 @@ class AFD_State {
 
     AFD_State();
     AFD_State(unordered_set<AFTE_State*> conjunto);
+    AFD_State(unordered_set<AFTEL_State*> conjunto);
     ~AFD_State(){};
 
     bool isEquivalent(AFD_State*);
