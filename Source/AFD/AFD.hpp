@@ -18,7 +18,9 @@ class AFD {
     ~AFD(){};
 
     void makeTransitions(AFD_State*, AFTE M);
+    void makeTransitions(AFD_State*, AFTEL M);
     void addState(AFD_State*, AFTE);
+    void addState(AFD_State*, AFTEL);
     AFD_State* findEquivalent(AFD_State*);
     string toString();
 };

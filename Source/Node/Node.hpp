@@ -49,7 +49,7 @@ class Node {
     // AFTE Conversion
     virtual AFTE toAFTE();
 
-    // AFTEL Concersion
+    // AFTEL Conversion
     virtual AFTEL toAFTEL();
     virtual AFTEL toAFTEL(double x, double y);
 };

@@ -9,6 +9,7 @@ class AFD_State {
     static int count;
     int id;
     unordered_set<AFTE_State*>* AFTE_Equivalent;
+    unordered_set<AFTEL_State*>* AFTEL_Equivalent;
 
     AFD_State();
     AFD_State(unordered_set<AFTE_State*> conjunto);

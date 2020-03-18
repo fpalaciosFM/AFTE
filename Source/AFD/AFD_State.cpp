@@ -5,12 +5,20 @@ int AFD_State::count = 0;
 AFD_State::AFD_State() {
     this->id = AFD_State::count++;
     this->AFTE_Equivalent = new unordered_set<AFTE_State*>();
+    this->AFTEL_Equivalent = new unordered_set<AFTEL_State*>();
 }
 
 AFD_State::AFD_State(unordered_set<AFTE_State*> conjunto) : AFD_State() {
     this->AFTE_Equivalent = new unordered_set<AFTE_State*>;
     for (auto& q : conjunto) {
         this->AFTE_Equivalent->insert(q);
+    }
+}
+
+AFD_State::AFD_State(unordered_set<AFTEL_State*> conjunto) : AFD_State() {
+    this->AFTEL_Equivalent = new unordered_set<AFTEL_State*>;
+    for (auto& q : conjunto) {
+        this->AFTEL_Equivalent->insert(q);
     }
 }
 

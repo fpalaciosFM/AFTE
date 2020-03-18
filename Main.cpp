@@ -15,8 +15,14 @@ int main(int argc, char const *argv[]) {
     RegExpr exp;
     cin >> exp;
 
+    AFTE M = exp.toAFTE();
     AFTEL ML = exp.toAFTEL();
-    AFD AF(ML);
+    AFD afdl(ML);
+    AFD afd(M);
+
+    if (argc <= 1) {
+        cout << afd.toString() << endl;
+    }
 
     for (int i = 0; i < argc; i++) {
         if (strcmp(argv[i], "Tree") == 0) {
@@ -25,8 +31,8 @@ int main(int argc, char const *argv[]) {
         if (strcmp(argv[i], "AFTE_Diagram") == 0) {
             cout << ML.toDiagram() << endl;
         }
-        if (strcmp(argv[i], "AFD_Table")) {
-            cout << AF.toString() << endl;
+        if (strcmp(argv[i], "AFD_Table") == 0) {
+            cout << afd.toString() << endl;
         }
     }
 
