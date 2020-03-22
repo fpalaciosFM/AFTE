@@ -1,6 +1,7 @@
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
+
 #include "Source/AFD/AFD.hpp"
 #include "Source/AFD/AFD_State.hpp"
 #include "Source/AFTE/AFTE.hpp"
@@ -17,24 +18,25 @@ int main(int argc, char const *argv[]) {
 
     AFTE M = exp.toAFTE();
     AFTEL ML = exp.toAFTEL();
-    AFD afdl(ML);
-    AFD afd(M);
+    AFD AL(ML);
+    // AFD A(M);
 
-    if (argc <= 1) {
-        cout << afd.toString() << endl;
-    }
+    // cout << "A:" << endl
+    //      << A.toString() << endl;
+    cout << "AL:" << endl
+         << AL.toString() << endl;
 
-    for (int i = 0; i < argc; i++) {
-        if (strcmp(argv[i], "Tree") == 0) {
-            cout << exp.printTree() << endl;
-        }
-        if (strcmp(argv[i], "AFTE_Diagram") == 0) {
-            cout << ML.toDiagram() << endl;
-        }
-        if (strcmp(argv[i], "AFD_Table") == 0) {
-            cout << afd.toString() << endl;
-        }
-    }
+    // for (int i = 0; i < argc; i++) {
+    //     if (strcmp(argv[i], "Tree") == 0) {
+    //         cout << exp.printTree() << endl;
+    //     }
+    //     if (strcmp(argv[i], "AFTE_Diagram") == 0) {
+    //         cout << ML.toDiagram() << endl;
+    //     }
+    //     if (strcmp(argv[i], "AFD_Table") == 0) {
+    //         cout << A.toString() << endl;
+    //     }
+    // }
 
     return 0;
 }

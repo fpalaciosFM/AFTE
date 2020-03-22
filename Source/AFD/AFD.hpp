@@ -22,6 +22,7 @@ class AFD {
     void addState(AFD_State*, AFTE);
     void addState(AFD_State*, AFTEL);
     AFD_State* findEquivalent(AFD_State*);
+    AFD_State* findEquivalentL(AFD_State*);
     string toString();
 };
 
