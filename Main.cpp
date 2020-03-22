@@ -4,7 +4,6 @@
 
 #include "Source/AFD/AFD.hpp"
 #include "Source/AFD/AFD_State.hpp"
-#include "Source/Latex/Latex.hpp"
 #include "Source/Misc/State.hpp"
 #include "Source/RegExpr/RegExp.hpp"
 
@@ -16,6 +15,7 @@ int main(int argc, char const *argv[]) {
 
     AFTEL ML = exp.toAFTEL();
     AFD AL(ML);
+
     cout << AL.toString() << endl;
 
     for (int i = 0; i < argc; i++) {

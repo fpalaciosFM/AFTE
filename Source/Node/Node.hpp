@@ -4,7 +4,6 @@
 #include <iostream>
 
 #include "../AFTE_Latex/AFTEL.hpp"
-#include "../Latex/Latex.hpp"
 #include "../Misc/Misc.hpp"
 #include "../Misc/State.hpp"
 
