@@ -1,7 +1,7 @@
 #ifndef AFD_HPP
 #define AFD_HPP
 
-#include "../AFTE_Latex/AFTEL.hpp"
+#include "../AFTE/AFTEL.hpp"
 #include "AFD_State.hpp"
 
 class AFD {
@@ -13,11 +13,11 @@ class AFD {
     AFD_State* initialState;                                                 // E*({q_0})
 
     AFD(){};
-    AFD(AFTEL);
+    AFD(AFTE);
     ~AFD(){};
 
-    void makeTransitions(AFD_State*, AFTEL M);
-    void addState(AFD_State*, AFTEL);
+    void makeTransitions(AFD_State*, AFTE M);
+    void addState(AFD_State*, AFTE);
     AFD_State* findEquivalentL(AFD_State*);
     string toString();
 };

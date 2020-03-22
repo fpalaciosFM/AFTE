@@ -28,12 +28,12 @@ void tabs(string& s, int k) {
     }
 }
 
-AFTEL Node::toAFTEL() {
+AFTE Node::toAFTEL() {
     this->initDims();
     return this->toAFTEL(0., 0.);
 }
 
-AFTEL Node::toAFTEL(double x, double y) {
+AFTE Node::toAFTEL(double x, double y) {
 }
 
 int max(int a, int b) {

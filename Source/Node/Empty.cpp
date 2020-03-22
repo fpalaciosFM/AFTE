@@ -22,8 +22,8 @@ ostream& Empty::Print(ostream& os) const {
     return os << "empty";
 }
 
-AFTEL Empty::toAFTEL(double x, double y) {
-    AFTEL_State* qi = new AFTEL_State(x, y);
-    AFTEL_State* qf = new AFTEL_State(x + N + E, y);
-    return AFTEL(qi, qf);
+AFTE Empty::toAFTEL(double x, double y) {
+    AFTE_State* qi = new AFTE_State(x, y);
+    AFTE_State* qf = new AFTE_State(x + N + E, y);
+    return AFTE(qi, qf);
 }

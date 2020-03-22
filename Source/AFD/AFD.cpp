@@ -1,7 +1,7 @@
 #include "AFD.hpp"
 
-AFD::AFD(AFTEL M) : AFD() {
-    unordered_set<AFTEL_State*> inputSet = M.RelationE({M.initialState});
+AFD::AFD(AFTE M) : AFD() {
+    unordered_set<AFTE_State*> inputSet = M.RelationE({M.initialState});
     AFD_State* newInitialState = new AFD_State(inputSet);
 
     this->initialState = newInitialState;
@@ -14,21 +14,21 @@ AFD::AFD(AFTEL M) : AFD() {
     }
 }
 
-void AFD::addState(AFD_State* q, AFTEL M) {
+void AFD::addState(AFD_State* q, AFTE M) {
     this->states.insert(q);
     if (M.isFinal(*q->AFTEL_Equivalent)) {
         this->finalStates.insert(q);
     }
 }
 
-void AFD::makeTransitions(AFD_State* q, AFTEL M) {
+void AFD::makeTransitions(AFD_State* q, AFTE M) {
     if (isStateIn(q, this->states)) {
         return;
     }
 
     this->addState(q, M);
 
-    unordered_set<AFTEL_State*> inputSet;
+    unordered_set<AFTE_State*> inputSet;
     AFD_State* newState;
     unordered_map<char, AFD_State*> newTransitions;
 

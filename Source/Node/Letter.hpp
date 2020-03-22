@@ -16,7 +16,7 @@ class Letter : public Node {
     virtual ostream& Print(ostream& os) const;
 
     // AFTEL Conversion
-    virtual AFTEL toAFTEL(double x, double y);
+    virtual AFTE toAFTEL(double x, double y);
 };
 
 #endif /* LETTER_HPP */

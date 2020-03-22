@@ -22,11 +22,11 @@ ostream& Lambda::Print(ostream& os) const {
     return os << "lambda";
 }
 
-AFTEL Lambda::toAFTEL(double x, double y) {
-    AFTEL_State* qi = new AFTEL_State(x, y);
+AFTE Lambda::toAFTEL(double x, double y) {
+    AFTE_State* qi = new AFTE_State(x, y);
     cout << "qi: " << qi << endl;
-    AFTEL_State* qf = new AFTEL_State(x + N + E, y);
+    AFTE_State* qf = new AFTE_State(x + N + E, y);
     cout << "qf: " << qf << endl;
     qi->addLambda(qf);
-    return AFTEL(qi, qf);
+    return AFTE(qi, qf);
 }

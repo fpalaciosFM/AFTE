@@ -16,7 +16,7 @@ class Union : public BinOp {
     virtual void initDims();
 
     // AFTEL Conversion
-    virtual AFTEL toAFTEL(double x, double y);
+    virtual AFTE toAFTEL(double x, double y);
 };
 
 #endif /* UNION_HPP */
