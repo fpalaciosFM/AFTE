@@ -22,7 +22,7 @@ ostream& Lambda::Print(ostream& os) const {
     return os << "lambda";
 }
 
-AFTE Lambda::toAFTEL(double x, double y) {
+AFTE Lambda::toAFTE(double x, double y) {
     AFTE_State* qi = new AFTE_State(x, y);
     cout << "qi: " << qi << endl;
     AFTE_State* qf = new AFTE_State(x + N + E, y);

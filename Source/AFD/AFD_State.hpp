@@ -1,13 +1,13 @@
 #ifndef AFD_STATE_HPP
 #define AFD_STATE_HPP
 
-#include "../AFTE/AFTEL.hpp"
+#include "../AFTE/AFTE.hpp"
 
 class AFD_State {
    public:
     static int count;
     int id;
-    unordered_set<AFTE_State*>* AFTEL_Equivalent;
+    unordered_set<AFTE_State*>* AFTE_Equivalent;
 
     AFD_State();
     AFD_State(unordered_set<AFTE_State*> conjunto);

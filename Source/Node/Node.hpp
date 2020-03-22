@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "../AFTE/AFTEL.hpp"
+#include "../AFTE/AFTE.hpp"
 #include "../Misc/Misc.hpp"
 
 using namespace std;
@@ -42,9 +42,9 @@ class Node {
 
     virtual void initDims();
 
-    // AFTEL Conversion
-    virtual AFTE toAFTEL();
-    virtual AFTE toAFTEL(double x, double y);
+    // AFTE Conversion
+    virtual AFTE toAFTE();
+    virtual AFTE toAFTE(double x, double y);
 };
 
 void tabs(string& s, int k);

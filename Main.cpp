@@ -11,7 +11,7 @@ int main(int argc, char const *argv[]) {
     RegExpr exp;
     cin >> exp;
 
-    AFTE ML = exp.toAFTEL();
+    AFTE ML = exp.toAFTE();
     AFD AL(ML);
 
     cout << AL.toString() << endl;

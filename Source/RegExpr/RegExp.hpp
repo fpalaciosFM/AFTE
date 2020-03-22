@@ -19,7 +19,7 @@ class RegExpr {
     friend RegExpr operator*(const RegExpr& a, const RegExpr& b);
     friend RegExpr operator*(const RegExpr& a);
     string printTree();
-    AFTE toAFTEL();
+    AFTE toAFTE();
 };
 
 void PrintMat(RegExpr** A, int N);

@@ -25,7 +25,7 @@ ostream& Letter::Print(ostream& os) const {
     return os << ch;
 }
 
-AFTE Letter::toAFTEL(double x, double y) {
+AFTE Letter::toAFTE(double x, double y) {
     AFTE_State* qi = new AFTE_State(x, y);
     AFTE_State* qf = new AFTE_State(x + N + E, y);
     qi->addTransition(this->ch, qf);

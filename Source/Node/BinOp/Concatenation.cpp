@@ -68,9 +68,9 @@ Node* Concatenation::Simp(void) const {
     return new Concatenation(l, r);
 }
 
-AFTE Concatenation::toAFTEL(double x, double y) {
-    AFTE M1 = left->toAFTEL(x, y + (height - left->height) / 2);
-    AFTE M2 = right->toAFTEL(x + left->width + E, y + (height - right->height) / 2);
+AFTE Concatenation::toAFTE(double x, double y) {
+    AFTE M1 = left->toAFTE(x, y + (height - left->height) / 2);
+    AFTE M2 = right->toAFTE(x + left->width + E, y + (height - right->height) / 2);
     M1.finalState->addLambda(M2.initialState);
     return AFTE(M1.initialState, M2.finalState);
 }

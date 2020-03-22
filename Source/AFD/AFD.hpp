@@ -1,7 +1,7 @@
 #ifndef AFD_HPP
 #define AFD_HPP
 
-#include "../AFTE/AFTEL.hpp"
+#include "../AFTE/AFTE.hpp"
 #include "AFD_State.hpp"
 
 class AFD {

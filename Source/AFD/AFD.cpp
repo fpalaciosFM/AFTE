@@ -16,7 +16,7 @@ AFD::AFD(AFTE M) : AFD() {
 
 void AFD::addState(AFD_State* q, AFTE M) {
     this->states.insert(q);
-    if (M.isFinal(*q->AFTEL_Equivalent)) {
+    if (M.isFinal(*q->AFTE_Equivalent)) {
         this->finalStates.insert(q);
     }
 }
@@ -33,7 +33,7 @@ void AFD::makeTransitions(AFD_State* q, AFTE M) {
     unordered_map<char, AFD_State*> newTransitions;
 
     for (auto& sigma : this->Sigma) {
-        inputSet = M.read(*q->AFTEL_Equivalent, sigma);
+        inputSet = M.read(*q->AFTE_Equivalent, sigma);
         newState = new AFD_State(inputSet);
         newState = this->findEquivalentL(newState);
         newTransitions.insert({{sigma, newState}});
@@ -45,7 +45,7 @@ void AFD::makeTransitions(AFD_State* q, AFTE M) {
 
 AFD_State* AFD::findEquivalentL(AFD_State* q) {
     for (auto& x : this->states) {
-        if (*x->AFTEL_Equivalent == *q->AFTEL_Equivalent) {
+        if (*x->AFTE_Equivalent == *q->AFTE_Equivalent) {
             AFD_State::count--;
             return x;
         }
