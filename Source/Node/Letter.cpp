@@ -33,13 +33,6 @@ void Letter::AfteLatex(State& qi, State& qf, double x, double y, int& count, str
     e += qi.toLatex(texStr, qf);
 }
 
-AFTE Letter::toAFTE() {
-    AFTE_State* q0 = new AFTE_State();
-    AFTE_State* qf = new AFTE_State();
-    q0->addTransition(this->ch, qf);
-    return AFTE(q0, qf);
-}
-
 AFTEL Letter::toAFTEL(double x, double y) {
     AFTEL_State* qi = new AFTEL_State(x, y);
     AFTEL_State* qf = new AFTEL_State(x + N + E, y);

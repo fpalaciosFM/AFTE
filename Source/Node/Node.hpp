@@ -2,7 +2,7 @@
 #define NODE_HPP
 
 #include <iostream>
-#include "../AFTE/AFTE.hpp"
+
 #include "../AFTE_Latex/AFTEL.hpp"
 #include "../Latex/Latex.hpp"
 #include "../Misc/Misc.hpp"
@@ -45,9 +45,6 @@ class Node {
     virtual void initDims();
     virtual string AfteLatex();
     virtual void AfteLatex(State& qi, State& qf, double x, double y, int& count, string& s, string& e);
-
-    // AFTE Conversion
-    virtual AFTE toAFTE();
 
     // AFTEL Conversion
     virtual AFTEL toAFTEL();

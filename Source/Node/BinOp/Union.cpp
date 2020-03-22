@@ -71,20 +71,6 @@ void Union::initDims() {
     this->width = 2 * N + 2 * E + max(left->width, right->width);
 }
 
-AFTE Union::toAFTE() {
-    AFTE_State* q0 = new AFTE_State();
-    AFTE_State* qf = new AFTE_State();
-    AFTE M1 = this->left->toAFTE();
-    AFTE M2 = this->right->toAFTE();
-
-    q0->addLambda(M1.initialState);
-    q0->addLambda(M2.initialState);
-    M1.finalState->addLambda(qf);
-    M2.finalState->addLambda(qf);
-
-    return AFTE(q0, qf);
-}
-
 AFTEL Union::toAFTEL(double x, double y) {
     AFTEL_State* qi = new AFTEL_State(x, y + left->height);
     AFTEL M1 = left->toAFTEL(x + (width - left->width) / 2, y);

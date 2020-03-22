@@ -1,18 +1,5 @@
 #include "AFD.hpp"
 
-AFD::AFD(AFTE M) : AFD() {
-    unordered_set<AFTE_State*> inputSet = M.RelationE({M.initialState});
-    AFD_State* newInitialState = new AFD_State(inputSet);
-    this->initialState = newInitialState;
-
-    this->makeTransitions(newInitialState, M);
-
-    int count = 0;
-    for (auto& x : this->transitions) {
-        x.first->id = count++;
-    }
-}
-
 AFD::AFD(AFTEL M) : AFD() {
     unordered_set<AFTEL_State*> inputSet = M.RelationE({M.initialState});
     AFD_State* newInitialState = new AFD_State(inputSet);
@@ -27,47 +14,11 @@ AFD::AFD(AFTEL M) : AFD() {
     }
 }
 
-void AFD::addState(AFD_State* q, AFTE M) {
-    this->states.insert(q);
-    if (M.isFinal(*q->AFTE_Equivalent)) {
-        this->finalStates.insert(q);
-    }
-}
-
 void AFD::addState(AFD_State* q, AFTEL M) {
     this->states.insert(q);
     if (M.isFinal(*q->AFTEL_Equivalent)) {
         this->finalStates.insert(q);
     }
-}
-
-void AFD::makeTransitions(AFD_State* q, AFTE M) {
-    if (isStateIn(q, this->states)) {
-        return;
-    }
-
-    this->addState(q, M);
-    // this->states.insert(q);
-
-    unordered_set<AFTE_State*> inputSet;
-    AFD_State* newState;
-    unordered_map<char, AFD_State*> newTransitions;
-
-    for (auto& sigma : this->Sigma) {
-        inputSet = M.read(*q->AFTE_Equivalent, sigma);
-        cout << sigma << endl;
-        for (auto& p : inputSet) {
-            cout << 'q' << p->id << ' ';
-        }
-        cout << endl;
-
-        newState = new AFD_State(inputSet);
-        newState = this->findEquivalent(newState);
-        newTransitions.insert({{sigma, newState}});
-        this->makeTransitions(newState, M);
-    }
-
-    this->transitions.insert({{q, newTransitions}});
 }
 
 void AFD::makeTransitions(AFD_State* q, AFTEL M) {
@@ -90,16 +41,6 @@ void AFD::makeTransitions(AFD_State* q, AFTEL M) {
     }
 
     this->transitions.insert({{q, newTransitions}});
-}
-
-AFD_State* AFD::findEquivalent(AFD_State* q) {
-    for (auto& x : this->states) {
-        if (*x->AFTE_Equivalent == *q->AFTE_Equivalent) {
-            AFD_State::count--;
-            return x;
-        }
-    }
-    return q;
 }
 
 AFD_State* AFD::findEquivalentL(AFD_State* q) {

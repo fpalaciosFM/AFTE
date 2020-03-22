@@ -30,15 +30,6 @@ void Lambda::AfteLatex(State& qi, State& qf, double x, double y, int& count, str
     e += qi.toLatex(qf);
 }
 
-AFTE Lambda::toAFTE() {
-    AFTE_State* q0 = new AFTE_State();
-    cout << "q0: " << q0 << endl;
-    AFTE_State* qf = new AFTE_State();
-    cout << "qf: " << qf << endl;
-    q0->addLambda(qf);
-    return AFTE(q0, qf);
-}
-
 AFTEL Lambda::toAFTEL(double x, double y) {
     AFTEL_State* qi = new AFTEL_State(x, y);
     cout << "qi: " << qi << endl;

@@ -76,13 +76,6 @@ Node* Concatenation::Simp(void) const {
     return new Concatenation(l, r);
 }
 
-AFTE Concatenation::toAFTE() {
-    AFTE M1 = this->left->toAFTE();
-    AFTE M2 = this->right->toAFTE();
-    M1.finalState->addLambda(M2.initialState);
-    return AFTE(M1.initialState, M2.finalState);
-}
-
 AFTEL Concatenation::toAFTEL(double x, double y) {
     AFTEL M1 = left->toAFTEL(x, y + (height - left->height) / 2);
     AFTEL M2 = right->toAFTEL(x + left->width + E, y + (height - right->height) / 2);
