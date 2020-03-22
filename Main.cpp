@@ -4,7 +4,6 @@
 
 #include "Source/AFD/AFD.hpp"
 #include "Source/AFD/AFD_State.hpp"
-#include "Source/Misc/State.hpp"
 #include "Source/RegExpr/RegExp.hpp"
 
 using namespace std;

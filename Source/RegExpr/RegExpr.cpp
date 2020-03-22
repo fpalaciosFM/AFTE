@@ -88,10 +88,6 @@ string RegExpr::printTree() {
     return ptr->printTree();
 }
 
-string RegExpr::AfteLatex() {
-    return ptr->AfteLatex();
-}
-
 AFTEL RegExpr::toAFTEL() {
     return ptr->toAFTEL();
 }

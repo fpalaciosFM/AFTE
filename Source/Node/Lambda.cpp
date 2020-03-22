@@ -22,14 +22,6 @@ ostream& Lambda::Print(ostream& os) const {
     return os << "lambda";
 }
 
-void Lambda::AfteLatex(State& qi, State& qf, double x, double y, int& count, string& s, string& e) {
-    qi.setPos(x, y);
-    qf.setPos(x + N + E, y);
-    s += qi.toLatex();
-    s += qf.toLatex();
-    e += qi.toLatex(qf);
-}
-
 AFTEL Lambda::toAFTEL(double x, double y) {
     AFTEL_State* qi = new AFTEL_State(x, y);
     cout << "qi: " << qi << endl;
