@@ -6,14 +6,6 @@ Concatenation::Concatenation(Node* l, Node* r) : BinOp(l, r) {
 
 Concatenation::~Concatenation() {}
 
-void Concatenation::AfteLatex(State& qi, State& qf, double x, double y, int& count, string& s, string& e) {
-    State pi(count++), pf(count++);
-    e += pf.toLatex(pi);
-
-    left->AfteLatex(qi, pf, x, y + (height - left->height) / 2, count, s, e);
-    right->AfteLatex(pi, qf, x + left->width + E, y + (height - right->height) / 2, count, s, e);
-}
-
 void Concatenation::initDims() {
     left->initDims();
     right->initDims();
@@ -76,16 +68,9 @@ Node* Concatenation::Simp(void) const {
     return new Concatenation(l, r);
 }
 
-AFTE Concatenation::toAFTE() {
-    AFTE M1 = this->left->toAFTE();
-    AFTE M2 = this->right->toAFTE();
+AFTE Concatenation::toAFTE(double x, double y) {
+    AFTE M1 = left->toAFTE(x, y + (height - left->height) / 2);
+    AFTE M2 = right->toAFTE(x + left->width + E, y + (height - right->height) / 2);
     M1.finalState->addLambda(M2.initialState);
     return AFTE(M1.initialState, M2.finalState);
-}
-
-AFTEL Concatenation::toAFTEL(double x, double y) {
-    AFTEL M1 = left->toAFTEL(x, y + (height - left->height) / 2);
-    AFTEL M2 = right->toAFTEL(x + left->width + E, y + (height - right->height) / 2);
-    M1.finalState->addLambda(M2.initialState);
-    return AFTEL(M1.initialState, M2.finalState);
 }

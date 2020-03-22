@@ -12,11 +12,8 @@ class AFD_State {
     AFD_State();
     AFD_State(unordered_set<AFTE_State*> conjunto);
     ~AFD_State(){};
-
-    bool isEquivalent(AFD_State*);
 };
 
 bool isStateIn(AFD_State* q, unordered_set<AFD_State*> conjunto);
-AFD_State* getStateFrom(AFD_State* q, unordered_set<AFD_State*> conjunto);
 
 #endif /* AFD_STATE_HPP */

@@ -22,16 +22,3 @@ bool isStateIn(AFD_State* q, unordered_set<AFD_State*> conjunto) {
     }
     return false;
 }
-
-AFD_State* getStateFrom(AFD_State* q, unordered_set<AFD_State*> conjunto) {
-    for (auto& x : conjunto) {
-        if (q == x) {
-            return q;
-        }
-    }
-    return 0;
-}
-
-bool AFD_State::isEquivalent(AFD_State* q) {
-    return *q->AFTE_Equivalent == *this->AFTE_Equivalent;
-}

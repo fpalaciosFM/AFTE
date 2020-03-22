@@ -1,7 +1,6 @@
 #ifndef REGEXPR_HPP
 #define REGEXPR_HPP
 
-#include "../AFTE/AFTE.hpp"
 #include "Parser.hpp"
 
 class RegExpr {
@@ -20,9 +19,7 @@ class RegExpr {
     friend RegExpr operator*(const RegExpr& a, const RegExpr& b);
     friend RegExpr operator*(const RegExpr& a);
     string printTree();
-    string AfteLatex();
     AFTE toAFTE();
-    AFTEL toAFTEL();
 };
 
 void PrintMat(RegExpr** A, int N);

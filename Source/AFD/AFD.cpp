@@ -3,13 +3,15 @@
 AFD::AFD(AFTE M) : AFD() {
     unordered_set<AFTE_State*> inputSet = M.RelationE({M.initialState});
     AFD_State* newInitialState = new AFD_State(inputSet);
+
     this->initialState = newInitialState;
 
     this->makeTransitions(newInitialState, M);
-    // for (auto& sigma : this->Sigma) {
-    //     inputSet = M.read(*this->initialState->AFTE_Equivalent, sigma);
-    //     newState = new AFD_State(inputSet);
-    // }
+
+    int count = 0;
+    for (auto& x : this->transitions) {
+        x.first->id = count++;
+    }
 }
 
 void AFD::addState(AFD_State* q, AFTE M) {
@@ -25,7 +27,6 @@ void AFD::makeTransitions(AFD_State* q, AFTE M) {
     }
 
     this->addState(q, M);
-    // this->states.insert(q);
 
     unordered_set<AFTE_State*> inputSet;
     AFD_State* newState;
@@ -34,7 +35,7 @@ void AFD::makeTransitions(AFD_State* q, AFTE M) {
     for (auto& sigma : this->Sigma) {
         inputSet = M.read(*q->AFTE_Equivalent, sigma);
         newState = new AFD_State(inputSet);
-        newState = this->findEquivalent(newState);
+        newState = this->findEquivalentL(newState);
         newTransitions.insert({{sigma, newState}});
         this->makeTransitions(newState, M);
     }
@@ -42,10 +43,10 @@ void AFD::makeTransitions(AFD_State* q, AFTE M) {
     this->transitions.insert({{q, newTransitions}});
 }
 
-AFD_State* AFD::findEquivalent(AFD_State* q) {
-    bool flag = false;
+AFD_State* AFD::findEquivalentL(AFD_State* q) {
     for (auto& x : this->states) {
         if (*x->AFTE_Equivalent == *q->AFTE_Equivalent) {
+            AFD_State::count--;
             return x;
         }
     }
@@ -68,7 +69,7 @@ string AFD::toString() {
     }
     s += "},\n";
 
-    s += " tranditions:{\n";
+    s += " transitions:{\n";
     for (auto& transition : this->transitions) {
         s += "\t" + to_string(transition.first->id);
         for (auto& c : transition.second) {

@@ -1,6 +1,5 @@
 *.txt
 *.o
 .vscode
-Stream
-AFTE
 *.exe
+AFTE

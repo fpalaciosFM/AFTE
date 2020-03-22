@@ -25,24 +25,9 @@ ostream& Letter::Print(ostream& os) const {
     return os << ch;
 }
 
-void Letter::AfteLatex(State& qi, State& qf, double x, double y, int& count, string& s, string& e) {
-    qi.setPos(x, y);
-    qf.setPos(x + N + E, y);
-    s += qi.toLatex();
-    s += qf.toLatex();
-    e += qi.toLatex(texStr, qf);
-}
-
-AFTE Letter::toAFTE() {
-    AFTE_State* q0 = new AFTE_State();
-    AFTE_State* qf = new AFTE_State();
-    q0->addTransition(this->ch, qf);
-    return AFTE(q0, qf);
-}
-
-AFTEL Letter::toAFTEL(double x, double y) {
-    AFTEL_State* qi = new AFTEL_State(x, y);
-    AFTEL_State* qf = new AFTEL_State(x + N + E, y);
+AFTE Letter::toAFTE(double x, double y) {
+    AFTE_State* qi = new AFTE_State(x, y);
+    AFTE_State* qf = new AFTE_State(x + N + E, y);
     qi->addTransition(this->ch, qf);
-    return AFTEL(qi, qf);
+    return AFTE(qi, qf);
 }
