@@ -48,8 +48,6 @@ void tabs(string& s, int k) {
     }
 }
 
-AFTE Node::toAFTE() {}
-
 AFTEL Node::toAFTEL() {
     this->initDims();
     return this->toAFTEL(0., 0.);
