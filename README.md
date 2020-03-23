@@ -1,8 +1,17 @@
 # AFTE
-Analizador de Expresiones Regulares utilizando AFTE's
+Analizador de Expresiones Rgulares utilizando AFTE's
 
-Ejemplo de gif animado en archivo Markdown:
+Ejemplo de gif animado en rchivo Markdown:
 <p align="center">
 	<img src="Readme_Source/Peek_Example_1.gif">
-	<img src="Readme_Source/Peek_Example_2.gif">
 </p>
+
+```c++
+#include <iostream>
+using namespace std;
+int main(){
+	cout << "Hello World" << endl;
+	return 0;
+}
+
+```
