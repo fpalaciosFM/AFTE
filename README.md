@@ -1,7 +1,36 @@
 # AFTE
-Analizador de Expresiones Rgulares utilizando AFTE's
+## Analizador de Expresiones Rgulares utilizando AFTE's
 
-Ejemplo de gif animado en rchivo Markdown:
+Este proyecto tiene como objetivo exponer la aplicación del Teorema de Síntesis de Kleene, el cual afirma lo siguiente:
+
+> #### Teorema de Síntesis de Kleene.
+> Sean $\Sigma$ un alfabeto y $A$ una expresión regular sobre $\Sigma$. Existe un Autómata Finito Determinista (AFD), digamos $M$, tal que:
+> 	$$ L(M) = A $$
+> Es decir, Dada una expresión regular se puede construir un AFD cuyo lenguaje coincida con dicha expresión regular. 
+
+---
+## Ejecución.
+
+Para compilar el programa debe clonar este repositorio en su equipo.
+
+```console
+user@machine:~$ git clone https://github.com/fpalaciosFM/AFTE.git 
+```
+
+Una vez que se encuentre dentro de la carpera ''AFTE'' desde su terminal, ejecute makefile:
+
+<p align="center">
+	<img src="Readme_Source/Peek_Compile.gif">
+</p>
+
+```console
+user@machine:~/AFTE$ make
+```
+
+
+
+
+Ejemplo de gif animado en archivo Markdown:
 <p align="center">
 	<img src="Readme_Source/Peek_Example_2.gif">
 </p>
