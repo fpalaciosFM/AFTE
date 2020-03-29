@@ -9,12 +9,13 @@ Este proyecto tiene como objetivo exponer la aplicación del Teorema de Síntesi
 > Es decir, Dada una expresión regular se puede construir un AFD cuyo lenguaje coincida con dicha expresión regular. 
 
 ---
-## Ejecución.
+
+## Compilación.
 
 Para compilar el programa debe clonar este repositorio en su equipo.
 
 ```console
-user@machine:~$ git clone https://github.com/fpalaciosFM/AFTE.git 
+user@hostname:~$ git clone https://github.com/fpalaciosFM/AFTE.git 
 ```
 
 Una vez que se encuentre dentro de la carpera ''AFTE'' desde su terminal, ejecute makefile:
@@ -23,8 +24,15 @@ Una vez que se encuentre dentro de la carpera ''AFTE'' desde su terminal, ejecut
 	<img src="Readme_Source/Peek_Compile.gif">
 </p>
 
+---
+
+## Ejecución
+
+
+
+
 ```console
-user@machine:~/AFTE$ make
+user@hostname:~/AFTE$ make
 ```
 
 
