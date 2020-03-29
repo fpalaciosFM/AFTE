@@ -16,9 +16,14 @@ string Node::printTree(int& k) {
     string s;
     tabs(s, k);
     if (k == 0) {
-        s += "\\";
+        s += "\\begin{tikzpicture}[nodes={draw, circle}, ->]\n\\";
+        // s += "\\";
     }
     s += "node{" + texStr + "}\n";
+    if (k == 0) {
+        s += ";\n\\end{tikzpicture}\n";
+        // s += "\\";
+    }
     return s;
 }
 

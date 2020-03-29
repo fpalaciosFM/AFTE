@@ -18,8 +18,13 @@ class AFD {
 
     void makeTransitions(AFD_State*, AFTE M);
     void addState(AFD_State*, AFTE);
-    AFD_State* findEquivalentL(AFD_State*);
+    AFD_State* findEquivalent(AFD_State*);
     string toString();
+
+    string toLatexTable();
+    string toLatexTableAlpha();
+    bool isFinal(AFD_State*);
+    // string toLatexDiagram();
 };
 
 #endif /* AFD_HPP */

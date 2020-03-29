@@ -35,7 +35,7 @@ void AFD::makeTransitions(AFD_State* q, AFTE M) {
     for (auto& sigma : this->Sigma) {
         inputSet = M.read(*q->AFTE_Equivalent, sigma);
         newState = new AFD_State(inputSet);
-        newState = this->findEquivalentL(newState);
+        newState = this->findEquivalent(newState);
         newTransitions.insert({{sigma, newState}});
         this->makeTransitions(newState, M);
     }
@@ -43,7 +43,7 @@ void AFD::makeTransitions(AFD_State* q, AFTE M) {
     this->transitions.insert({{q, newTransitions}});
 }
 
-AFD_State* AFD::findEquivalentL(AFD_State* q) {
+AFD_State* AFD::findEquivalent(AFD_State* q) {
     for (auto& x : this->states) {
         if (*x->AFTE_Equivalent == *q->AFTE_Equivalent) {
             AFD_State::count--;
@@ -82,5 +82,95 @@ string AFD::toString() {
     s += " }";
 
     s += "}";
+    return s;
+}
+
+bool AFD::isFinal(AFD_State* q) {
+    for (auto& p : this->finalStates) {
+        if (p == q) {
+            return true;
+        }
+    }
+    return false;
+}
+
+string AFD::toLatexTable() {
+    string s;
+    s += "\\begin{tabular}{|r||";
+    for (auto& x : this->Sigma) {
+        s += "c|";
+    }
+    s += "}\n";
+    s += "\t\\hline\n";
+    s += "\t $M$";
+    for (auto& x : this->Sigma) {
+        s += " & $";
+        s.push_back(x);
+        s += "$";
+    }
+    s += " \\\\\n";
+    s += "\t\\hline\n";
+    s += "\t\\hline\n";
+    for (auto& t : this->transitions) {
+        s += "\t$";
+
+        if (t.first == this->initialState) {
+            s += "\\xrightarrow{} ";
+        }
+        if (isFinal(t.first)) {
+            s += "*\\;";
+        }
+        s += "q_{" + to_string(t.first->id) + "}$";
+
+        for (auto& c : this->Sigma) {
+            s += " & $q_{" + to_string(t.second[c]->id) + "}$";
+        }
+
+        s += " \\\\\n";
+        s += "\t\\hline\n";
+    }
+    s += "\\end{tabular}";
+    return s;
+}
+
+string AFD::toLatexTableAlpha() {
+    string s;
+    s += "\\begin{tabular}{|r||";
+    for (auto& x : this->Sigma) {
+        s += "c|";
+    }
+    s += "}\n";
+    s += "\t\\hline\n";
+    s += "\t $M$";
+    for (auto& x : this->Sigma) {
+        s += " & $";
+        s.push_back(x);
+        s += "$";
+    }
+    s += " \\\\\n";
+    s += "\t\\hline\n";
+    s += "\t\\hline\n";
+    for (auto& t : this->transitions) {
+        s += "\t$";
+
+        if (t.first == this->initialState) {
+            s += "\\xrightarrow{} ";
+        }
+        if (isFinal(t.first)) {
+            s += "*\\;";
+        }
+        s.push_back(char('a' + t.first->id));
+        s += "$";
+
+        for (auto& c : this->Sigma) {
+            s += " & $";
+            s.push_back(char('a' + t.second[c]->id));  // to_string()
+            s += "$";
+        }
+
+        s += " \\\\\n";
+        s += "\t\\hline\n";
+    }
+    s += "\\end{tabular}";
     return s;
 }
