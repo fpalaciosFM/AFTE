@@ -1,5 +1,4 @@
 # AFTE
-## Analizador de Expresiones Rgulares utilizando AFTE's
 
 Este proyecto tiene como objetivo exponer la aplicación del Teorema de Síntesis de Kleene, el cual afirma lo siguiente:
 

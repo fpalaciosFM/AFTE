@@ -9,23 +9,41 @@ using namespace std;
 
 int main(int argc, char const *argv[]) {
     RegExpr exp;
-    cin >> exp;
+    stringstream ss(argv[1]);
+    ss >> exp;
 
-    AFTE ML = exp.toAFTE();
-    AFD AL(ML);
+    AFTE M = exp.toAFTE();
+    AFD A(M);
 
-    cout << AL.toString() << endl;
+    // cout << A.toLatexTableAlpha() << endl;
 
+    string input;
     for (int i = 0; i < argc; i++) {
         if (strcmp(argv[i], "Tree") == 0) {
             cout << exp.printTree() << endl;
         }
         if (strcmp(argv[i], "AFTE_Diagram") == 0) {
-            cout << ML.toDiagram() << endl;
+            cout << M.toDiagram() << endl;
         }
         if (strcmp(argv[i], "AFD_Table") == 0) {
-            cout << AL.toString() << endl;
+            cout << A.toLatexTableAlpha() << endl;
         }
+        if (strcmp(argv[i], "Ignore") == 0) {
+            input = "exit";
+        }
+    }
+
+    while (input != "exit" && cin.good()) {
+        cerr << "AFTE>> ";
+        cin >> input;
+
+        if (input == "exit" || cin.eof()) {
+            cerr << "Bye!" << endl;
+            break;
+        }
+
+        ss = stringstream(input);
+        cout << M.recognize(&ss) << endl;
     }
 
     return 0;
