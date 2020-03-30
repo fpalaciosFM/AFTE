@@ -124,7 +124,7 @@ child[missing]
 AFTE>> 
 ```
 
-Se imprime el código Latex del correspondiente arbol de derivación y al final aparece el 'prompt' esperando la entrada de cadenas de texto. Para poder visualizar el arbol debe agregar el paquete 'tikz' en el preámbulo, si además está utilizando el paquete 'babel' tendrá que agrear la librería de tikz 'babel', a continación se muestra el código latex para imprimir el arbol del ejemplo anterior:
+Se imprime el código Latex del correspondiente arbol de derivación y al final aparece el 'prompt' esperando la entrada de cadenas de texto. Para poder visualizar el arbol debe agregar el paquete 'tikz' en el preámbulo, si además está utilizando el paquete 'babel' tendrá que agrear la librería de tikz 'babel'. A continación se muestra el código latex para imprimir el arbol del ejemplo anterior:
 
 ```latex
 \documentclass{article}
@@ -170,7 +170,7 @@ El pdf resultante debería mostrar un diagrama parecido al siguiente:
 	<img src="Readme_Source/Tree.png">
 </p>
 
-Se puede ajustar la posición de los nodos agregando o quitando líneas que contengan 'child[missing]'
+Se puede ajustar la posición de los nodos agregando o quitando líneas que contengan 'child[missing]'.
 
 ---
 
@@ -216,7 +216,7 @@ Como salida deberá obtener el siguiente código latex:
 \end{tikzpicture}
 ```
 
-Para poder compilar el código latex debe agregar el paquete 'tikz' y las librerias de tikz 'babel' y 'automata':
+Para poder compilar el código latex debe agregar el paquete 'tikz' y las librerias de tikz 'babel' y 'automata' en el preámbulo:
 
 ```Latex
 \usepackage{tikz}
@@ -239,7 +239,7 @@ El pdf generado deberá mostrar un diagrama como el siguiente:
 
 ## Tabla de Transiciones
 
-Para obtener la tabla en Latex del Autómata Finito Determinista (AFD) correspondiente a la expresión regular dada, debe ingresar como parámetro 'AFD_Table' al comando (Recuerde que la expresión regular siempre es el primer parámetro):
+Para obtener la tabla del Autómata Finito Determinista (AFD) correspondiente a la expresión regular dada, debe ingresar como parámetro 'AFD_Table' al comando (Recuerde que la expresión regular siempre es el primer parámetro):
 
 ```console
 user@hostname:~/AFTE$ ./AFTE '(1+01)*' AFD_Table
@@ -266,8 +266,10 @@ Para la expresión regular (1+01)* deberá obtener el siguiente código Latex:
 \end{tabular}
 ```
 
-Se deberá generar la siguiente tabla:
+El cual genera la siguiente tabla:
 
 <p align="center">
 	<img src="Readme_Source/Table.png">
 </p>
+
+La flecha indica el estado inicial y los asteriscos indican estados finales. Esta tabla en general no representa al autómata mínimo.

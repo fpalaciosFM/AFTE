@@ -163,11 +163,23 @@ void AFTE::toDiagram(AFTE_State* q, unordered_set<AFTE_State*>* states_inserted,
         toDiagram(p, states_inserted, nodes, edges);
         *edges += "\t(" + to_string(q->id) + ") edge";
 
-        if (q->x - p->x > 0) {
-            if (q->y - p->y < 0) {
-                *edges += "[out=150,in=-90]";
+        if (q->x > p->x && q->x - p->x > 1) {
+            if (q->y < p->y) {
+                if (p->y - q->y > 3) {
+                    *edges += "[out=150,in=-90]";
+                } else if (p->y - q->y > 2) {
+                    *edges += "[out=150,in=-45]";
+                } else if (p->y - q->y > 1) {
+                    *edges += "[out=150,in=-30]";
+                }
             } else {
-                *edges += "[out=-90,in=30]";
+                if (q->y - p->y > 3) {
+                    *edges += "[out=-90,in=30]";
+                } else if (q->y - p->y > 2) {
+                    *edges += "[out=-135,in=30]";
+                } else if (q->y - p->y > 1) {
+                    *edges += "[out=-150,in=30]";
+                }
             }
         }
 
