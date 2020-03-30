@@ -4,7 +4,9 @@ Este proyecto tiene como objetivo ilustrar el Teorema de Síntesis de Kleene, ap
 
 > #### Teorema de Síntesis de Kleene.
 > Sean $\Sigma$ un alfabeto y $A$ una expresión regular sobre $\Sigma$. Existe un Autómata Finito Determinista (AFD) $M$, tal que:
+> 
 > 	$$ L(M) = A $$
+> 
 > Es decir, Dada una expresión regular se puede construir un AFD cuyo lenguaje sea igual a dicha expresión regular. 
 
 ---
