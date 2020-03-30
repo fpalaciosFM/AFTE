@@ -35,7 +35,7 @@ int main(int argc, char const *argv[]) {
 
     while (input != "exit" && cin.good()) {
         cerr << "AFTE>> ";
-        cin >> input;
+        getline(cin, input);
 
         if (input == "exit" || cin.eof()) {
             cerr << "Bye!" << endl;

@@ -115,7 +115,7 @@ string AFD::toLatexTable() {
         s += "\t$";
 
         if (t.first == this->initialState) {
-            s += "\\xrightarrow{} ";
+            s += "\\rightarrow{} ";
         }
         if (isFinal(t.first)) {
             s += "*\\;";
@@ -154,7 +154,7 @@ string AFD::toLatexTableAlpha() {
         s += "\t$";
 
         if (t.first == this->initialState) {
-            s += "\\xrightarrow{} ";
+            s += "\\rightarrow{} ";
         }
         if (isFinal(t.first)) {
             s += "*\\;";
