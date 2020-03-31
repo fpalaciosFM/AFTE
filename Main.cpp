@@ -15,8 +15,6 @@ int main(int argc, char const *argv[]) {
     AFTE M = exp.toAFTE();
     AFD A(M);
 
-    // cout << A.toLatexTableAlpha() << endl;
-
     string input;
     for (int i = 0; i < argc; i++) {
         if (strcmp(argv[i], "Tree") == 0) {
