@@ -5,10 +5,14 @@
 	- [Compilación.](#compilaci%c3%b3n)
 	- [Ejecución](#ejecuci%c3%b3n)
 	- [Expresiones Regulares](#expresiones-regulares)
-- [Opciones Adicionales](#opciones-adicionales)
+- [Características Adicionales](#caracter%c3%adsticas-adicionales)
 	- [Árbol de Derivación](#%c3%81rbol-de-derivaci%c3%b3n)
-	- [Diagramas de Transicioines Espontáneas](#diagramas-de-transicioines-espont%c3%a1neas)
+	- [Diagrama de Transiciones Espontáneas](#diagrama-de-transiciones-espont%c3%a1neas)
 	- [Tabla de Transiciones](#tabla-de-transiciones)
+- [Flujo de Datos](#flujo-de-datos)
+	- [Canal de entrada](#canal-de-entrada)
+	- [Canal de Salida](#canal-de-salida)
+	- [Canal de Error](#canal-de-error)
 
 # Introducción
 
@@ -83,7 +87,7 @@ Un ejemplo más interesante podría ser (0\*10\*10\*)\*+000(0+1)*. Esta expresi�
 Los espacios se ignoran.
 
 ---
-# Opciones Adicionales
+# Características Adicionales
 
 ## Árbol de Derivación
 
@@ -174,7 +178,7 @@ Se puede ajustar la posición de los nodos agregando o quitando líneas que cont
 
 ---
 
-## Diagramas de Transicioines Espontáneas
+## Diagrama de Transiciones Espontáneas
 
 Para imprimir el diagrama en Latex del Autómata Finito de Transiciones Espontáneas (AFTE) correspondiente a una expresión regular dada, ingrese la cadena 'AFTE_Diagram' (sin comillas) como parámetro (Recuerde que la expresión regular siempre es el primer parámetro).
 
@@ -272,4 +276,131 @@ El cual genera la siguiente tabla:
 	<img src="Readme_Source/Table.png">
 </p>
 
-La flecha indica el estado inicial y los asteriscos indican estados finales. Esta tabla en general no representa al autómata mínimo.
+La flecha indica el estado inicial y los asteriscos indican estados finales. Esta tabla en general no representa al AFD mínimo.
+
+Puede combinar las tres opciones ('Tree', 'AFTE_Diagram' y 'AFD_Table') como parámetros del programa en cualquier orden. Por ejemplo:
+
+```console
+user@hostname:~/AFTE$ ./AFTE 'lambda' AFTE_Diagram Tree
+\begin{tikzpicture}[initial text = $M$]
+	\node[state,initial] (0) at (0.000000,0.000000) {$q_{0}$};
+	\node[state,accepting] (1) at (2.000000,0.000000) {$q_{1}$};
+\path[->]
+	(0) edge (1)
+;
+\end{tikzpicture}
+\begin{tikzpicture}[nodes={draw, circle}, ->]
+\node{$\lambda$}
+;
+\end{tikzpicture}
+
+AFTE>> 
+```
+
+Si solamente quiere obtener el árbol de la expresión, el diagrama de transiciones y/o la tabla de transiciones sin ingresar cadenas de prueba, puede usar el parámetro 'Ignore', esto finalizará el programa después de imprimir la salida de las 3 opciones ('Tree', 'AFTE_Diagram' y 'AFD_Table') y no esperará a recibir cadenas de prueba.
+
+```console
+user@hostname:~/AFTE$ ./AFTE '01*' Tree Ignore
+\begin{tikzpicture}[nodes={draw, circle}, ->]
+\node{$\cdot$}
+child{
+	node{$0$}
+}
+child[missing]
+child{
+	node{$*$}
+	child{
+		node{$1$}
+	}
+}
+;
+\end{tikzpicture}
+
+user@hostname:~/AFTE$ 
+```
+
+---
+
+# Flujo de Datos
+
+## Canal de entrada
+
+Si desea guardar todas las cadenas de prueba en un archivo y luego ingresarlas como entrada en el programa, puede hacer uso de la redirección del canal de entrada. Suponga que tiene un archivo con el nombre 'in.txt' y que contiene lo siguiente:
+
+```
+0
+1
+00
+01
+10
+11
+```
+
+Para usar este archivo como entrada del programa para una expresión regular determinada, digamos 01\*, deberá ejecutar el siguiente comando:
+
+```console
+user@hostname:~/AFTE$ ./AFTE '01*' < in.txt
+```
+
+Al hacerlo obtendrá lo siguiente como salida:
+
+```console
+AFTE>> 1
+AFTE>> 0
+AFTE>> 0
+AFTE>> 1
+AFTE>> 0
+AFTE>> 0
+AFTE>> Bye!
+```
+
+El programa dará una respuesta por cada línea del archivo de entrada, indicando si la cadena de dicha línea pertenece o no a la expresión regular. Note que el programa termina automáticamente al terminar de leer el archivo. Otra forma de ingresar el archivo como entrada del programa es utilizando 'pipes':
+
+```console
+user@hostname:~/AFTE$ cat in.txt | ./AFTE '01*'
+```
+
+Al ejecutar este comando se obtiene el mismo resultado.
+
+---
+
+## Canal de Salida
+
+Si se desea redireccionar la salida del programa a un archivo, digamos 'out.txt', puede ejecutar el siguiente comando:
+
+```console
+user@hostname:~/AFTE$ ./AFTE '01* + 11' > out.txt
+```
+
+Para este ejemplo la expresión regular es 01\*\+11. Al ejecutar este comando aparece el 'prompt' en espera de una cadena de caracteres. Se guardarán todas las respuestas del programa en el archivo 'out.txt' hasta terminar la ejecución del programa. Usando el mismo archivo 'in.txt' de la sección 'Canal de Entrada' obtenemos lo siguiente:
+
+```console
+user@hostname:~/AFTE$ ./AFTE '01* + 11' < in.txt > out.txt
+AFTE>> AFTE>> AFTE>> AFTE>> AFTE>> AFTE>> AFTE>> Bye!
+```
+
+(En la siguiente sección se explica el motivo de esta salida)
+
+Después puede comprobar el contenido del archivo 'out.txt':
+
+```console
+user@hostname:~/AFTE$ cat out.txt 
+1
+0
+0
+1
+0
+1
+```
+
+---
+
+## Canal de Error
+
+El prompt 'AFTE>>' y el mensaje 'Bye!' son dirigidos al canal de error, por tal motivo se siguen mostrando cuando se redirecciona el canal de salida estándar. Si desea que estos mensajes no aparezcan puede redireccionar el canal de error:
+
+```console
+user@hostname:~/AFTE$ ./AFTE '01* + 11' 2> /dev/null
+```
+
+Redireccionar a '/dev/null' evita la tarea de guardar la salida en un archivo y después borrarlo.
