@@ -7,7 +7,14 @@
 
 using namespace std;
 
+void syntax_help();
+
 int main(int argc, char const *argv[]) {
+    if (argc == 1) {
+        syntax_help();
+        return 0;
+    }
+
     RegExpr exp;
     stringstream ss(argv[1]);
     ss >> exp;
@@ -45,4 +52,10 @@ int main(int argc, char const *argv[]) {
     }
 
     return 0;
+}
+void syntax_help() {
+    cerr << " Expected regular expression as first parameter" << endl;
+    cerr << " Usage:" << endl;
+    cerr << "\t ./AFTE REGEXPR [OPTION]..." << endl;
+    cerr << "\t ./AFTE REGEXPR [Tree|AFTE_Diagram|AFD_Table|Ignore]..." << endl;
 }

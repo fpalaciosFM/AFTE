@@ -1,5 +1,5 @@
 CXX		:= g++
-TARGET	:= $(PROJNAME)$(EXT)
+TARGET	:= AFTE$(EXT)
 
 HDRS	:= $(shell python make/pyfind.py Source .hpp)
 
