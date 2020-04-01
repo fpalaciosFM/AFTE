@@ -48,6 +48,5 @@ class Node {
 };
 
 void tabs(string& s, int k);
-int max(int a, int b);
 
 #endif /* NODE_HPP */
