@@ -31,8 +31,8 @@ class Node {
 
     // Tree Latex Printing
     string getTexStr() { return texStr; };
-    string printTree();
-    string printTree(int&);
+    virtual string printTree();
+    virtual string printTree(int&);
 
     // AFTE Latex Printing
     double height;
@@ -43,7 +43,7 @@ class Node {
     virtual void initDims();
 
     // AFTE Conversion
-    AFTE toAFTE();
+    virtual AFTE toAFTE();
     virtual AFTE toAFTE(double x, double y) = 0;
 };
 
