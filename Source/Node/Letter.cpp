@@ -19,7 +19,9 @@ Letter::Letter(char c) {
 Letter::~Letter(void) {}
 
 /**
- * Obtener el tipo de nodo.
+ * Obtener tipo.
+ * 
+ * Obtener tipo del nodo invocador.
  *
  * @return enumerador LETTER
  */
@@ -28,12 +30,11 @@ int Letter::Type(void) const {
 }
 
 /**
- * Obtener copia del nodo.
+ * Obtener copia.
  * 
- * Se crea un nuevo nodo Letter con la misma letra de la instancia
- * que hace la llamada a este metodo.
+ * Se crea un nuevo nodo Letter con la misma letra del nodo invocador.
  * 
- * @return Letter* con el mismo string de la instancia invocadora
+ * @return apuntador a nodo con copia del nodo invocador
  */
 Node* Letter::Copy(void) const {
     return new Letter(ch);
@@ -42,17 +43,18 @@ Node* Letter::Copy(void) const {
 /**
  * Simplificar nodo.
  * 
- * Los nodos Letter ya no pueden simplificarse mas.
+ * Los nodos tipo LETTER no pueden simplificarse mas.
  * 
- * @return copia de la instancia invocadora
+ * @return apuntador a nodo con copia del nodo invocador
  */
 Node* Letter::Simp(void) const {
     return Copy();
 }
 
 /**
- * Imprimir el euivalente del nodo invocador en texto crudo.
+ * Imprimir el equivalente del nodo invocador en texto crudo.
  * 
+ * @param os canal de salida
  * @return canal de salida
  */
 ostream& Letter::Print(ostream& os) const {
