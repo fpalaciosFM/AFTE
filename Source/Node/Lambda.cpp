@@ -47,6 +47,8 @@ Node* Lambda::Simp(void) const {
 /**
  * Imprimir el equivalente del nodo invocador en texto crudo.
  * 
+ * Imprime el string "lambda".
+ * 
  * @param os canal de salida
  * @return canal de salida
 */
