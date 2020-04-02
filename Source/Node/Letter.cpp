@@ -54,6 +54,8 @@ Node* Letter::Simp(void) const {
 /**
  * Imprimir el equivalente del nodo invocador en texto crudo.
  * 
+ * Imprime el caracter correspondiente a la letra del nodo invocador.
+ * 
  * @param os canal de salida
  * @return canal de salida
  */
