@@ -1,5 +1,8 @@
 #include "Lambda.hpp"
 
+/**
+ * 
+ */
 Lambda::Lambda(void) {
     texStr = "$\\lambda$";
 };
