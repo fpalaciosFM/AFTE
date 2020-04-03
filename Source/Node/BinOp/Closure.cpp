@@ -60,7 +60,7 @@ Node* Closure::Copy(void) const {
  * 		- la cerradora del conjunto lambda es el conjunto lambda.
  * 		- la cerradura es una operacion idempotente.
  * 
- * @return apuntador a nodo con copia del nodo invocador
+ * @return apuntador a nodo con copia del nodo invocador simplificado
  */
 Node* Closure::Simp(void) const {
     Node* l = left->Simp();
@@ -85,7 +85,10 @@ Node* Closure::Simp(void) const {
 /**
  * Imprimir el equivalente del nodo invocador en texto crudo.
  * 
- * Imprime el caracter correspondiente a la letra del nodo invocador.
+ * Si el nodo hijo izquierdo es de tipo UNION o CONCAT, entonces se
+ * imprime el texto del nodo hijo encerrado entre parentesis. En otro
+ * caso solo se imprime el texto del nodo hijo. Al final se agrega un
+ * asterisco al texto.
  * 
  * @param os canal de salida
  * @return canal de salida
