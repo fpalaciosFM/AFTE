@@ -3,7 +3,7 @@
 /**
  * Constructor de nodo Concatenation.
  * 
- * Inicializa el nodo con el string equivalente en Latex.
+ * Inicializa el nodo con el string equivalente en Latex (punto).
  */
 Concatenation::Concatenation(Node* l, Node* r) : BinOp(l, r) {
     texStr = "$\\cdot$";

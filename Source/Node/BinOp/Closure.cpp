@@ -3,7 +3,7 @@
 /**
  * Constructor de nodo Closure.
  * 
- * Inicializa el nodo con el string equivalente en Latex.
+ * Inicializa el nodo con el string equivalente en Latex (asterisco).
  */
 Closure::Closure(Node* l) : BinOp(l, NULL) {
     texStr = "$*$";
