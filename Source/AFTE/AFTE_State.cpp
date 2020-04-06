@@ -1,27 +1,39 @@
 #include "AFTE_State.hpp"
 
-// count se utiliza para no tener que darle nombre a cada estado, se genera automaticamente
+/**
+ * Contador de estados.
+ * 
+ * Contador utilizado para generar los identificadores de los estados.
+ */
 int AFTE_State::count = 0;
 
-// Constructor con las coordenadas del estado para su impresion en LaTeX.
+/** 
+ * Constructor con las coordenadas del estado para su impresion en LaTeX.
+ */
 AFTE_State::AFTE_State(double x, double y) {
     this->id = AFTE_State::count++;
     this->x = x;
     this->y = y;
 }
 
-// Constructor que asigna el identificador
+/**
+ * Constructor sin parametros.
+*/
 AFTE_State::AFTE_State() : AFTE_State(0, 0) {
 }
 
 AFTE_State::~AFTE_State() {}
 
-// ******************
-// ** AFTE Methods **
-// ******************
-
-// Se agrega una transición desde este estado hacia el estado 'q' a traves de la letra 'c'.
-// Las transiciones van de un estado hacia un conjunto de estados.
+/**
+ * Agregar transicion.
+ * 
+ * Se agrega una transición desde el estado invocador hacia el estado
+ * 'q' a traves de la letra 'c'. Las transiciones van de un estado hacia
+ * un conjunto de estados.
+ * 
+ * @param c letra de la transicion
+ * @param q estado destino de la transicion
+*/
 void AFTE_State::addTransition(char c, AFTE_State* q) {
     if (this->transitions.find(c) == this->transitions.end()) {
         unordered_set<AFTE_State*> new_unordered_set({q});
@@ -32,13 +44,24 @@ void AFTE_State::addTransition(char c, AFTE_State* q) {
     this->transitions[c].insert(q);
 }
 
-// Se agrega una transición desde este estado hacia el estado 'q' de forma espontanea.
-// Las transiciones lambda van de un estado hacia un conjunto de estados.
+/**
+ * Se agrega una transicion espontanea desde el estado invocador hacia
+ * el estado 'q'. Las transiciones lambda van de un estado hacia un
+ * conjunto de estados.
+ * 
+ * @param q estado destino de la transicion espontanea
+*/
 void AFTE_State::addLambda(AFTE_State* q) {
     this->lambdas.insert(q);
 }
 
-// Regresa el conjunto de estados correspondiente a la transición desde este estado a travez de la letra 'c'.
+/**
+ * Regresa el conjunto de estados correspondiente a la transición desde
+ * el estado invocador a travez de la letra 'c'.
+ * 
+ * @return conjunto de estados correspondiente a las transiciones desde
+ *      estado a traves de la letra 'c'.
+*/
 unordered_set<AFTE_State*> AFTE_State::read(char c) {
     if (this->transitions.find(c) == this->transitions.end()) {
         return unordered_set<AFTE_State*>();
@@ -46,7 +69,11 @@ unordered_set<AFTE_State*> AFTE_State::read(char c) {
     return this->transitions[c];
 }
 
-// Devuelve un string con las transiciones y las transiciones espontaneas de este estado.
+/**
+ * Conversion a texto.
+ * 
+ * @return texto con resumen de informacion del estado invocador
+*/
 string AFTE_State::toString() {
     string s = "\tq" + to_string(this->id) + ":";
     s += " {";
@@ -72,7 +99,18 @@ string AFTE_State::toString() {
     return s;
 }
 
-// Funcion para verificar si un estado 'q' es un elemento del conjunto 'conjunto'.
+/**
+ * Pertenencia de un estado en un conjunto.
+ * 
+ * Revisa si el primer parametro es un elemento del conjunto del segundo
+ * parametro.
+ * 
+ * @param q estado para verificar pertenencia
+ * @param conjunto de prueba
+ * 
+ * @return true si el estado q pertenece al conjunto, false en caso
+ *      contrario
+ */
 bool isStateIn(AFTE_State* q, unordered_set<AFTE_State*> conjunto) {
     for (auto& state : conjunto) {
         if (q == state) {
@@ -81,7 +119,3 @@ bool isStateIn(AFTE_State* q, unordered_set<AFTE_State*> conjunto) {
     }
     return false;
 }
-
-// *******************
-// ** Latex Methods **
-// *******************
