@@ -1,7 +1,15 @@
 #include "AFD.hpp"
 
 /**
- * Conversion de AFTE a AFD.
+ * Constructor de AFD.
+ * 
+ * Se genera el conjunto de estados de AFTE correspondiente a la imagen
+ * del estado inicial del AFTE M bajo su relacion de transiciones
+ * espontaneas. Este conjunto se guarda como el estado equivalente al
+ * estado inicial el AFD en construccion.
+ * Se generan todas las correspondientes transiciones del AFD.
+ * 
+ * @param M AFTE que se desea convertir a AFD
  */
 AFD::AFD(AFTE M) : AFD() {
     unordered_set<AFTE_State*> inputSet = M.RelationE({M.initialState});
@@ -20,12 +28,11 @@ AFD::AFD(AFTE M) : AFD() {
 /**
  * Agregar estado.
  * 
- * Agrega un estado al conjunto de estados. En caso de que el estado
- * equivalente en AFTE sea final, entonces se agrega al conjunto de
- * estados finales del AFD invocador.
+ * Agrega el estado q al conjunto de estados del AFD invocador. Se usa
+ * el AFTE para verificar si el estado q es final.
  * 
  * @param q estado a agregar
- * @param M AFTE equivalente al AFD invocador
+ * @param AFTE equivalente
  */
 void AFD::addState(AFD_State* q, AFTE M) {
     this->states.insert(q);
@@ -34,6 +41,23 @@ void AFD::addState(AFD_State* q, AFTE M) {
     }
 }
 
+/**
+ * Generar transiciones.
+ * 
+ * Funcion recursiva para generar todos los estados del AFD dado el AFTE
+ * equivalente.
+ * Si q ya es un estado del AFD invocador, entonces se asume que sus
+ * transiciones ya fueron generadas y se termina la recursividad, siendo
+ * este el caso base.
+ * Si q no ha sido insertado como estado del AFD invocador, entonces se
+ * generan las transiciones de este estado por cada letra del alfabeto,
+ * y por cada transicion se genera un estado posiblemente nuevo, a cada
+ * uno de estos se le evalua en esta funcion para, en caso de ser
+ * necesario, generar sus transiciones, siendo este el caso recursivo.
+ * 
+ * @param q estado al cual se le pretende generar sus transiciones
+ * @param M AFTE equivalente al AFD invocador
+ */
 void AFD::makeTransitions(AFD_State* q, AFTE M) {
     if (isStateIn(q, this->states)) {
         return;
@@ -56,6 +80,21 @@ void AFD::makeTransitions(AFD_State* q, AFTE M) {
     this->transitions.insert({{q, newTransitions}});
 }
 
+/**
+ * Encontrar estado equivalente.
+ * 
+ * Si se genera un estado que ya existia en el AFD, solo se
+ * diferenciaran en su identificador, por lo tanto tendran el mismo
+ * estado de AFTE equivalente. Para evitar repeticiones se verifica
+ * la equivalencia, y en caso positivo se resta uno al congtador para
+ * tener consistencia en la generacion de identificadores.
+ * 
+ * @param q estado del cual se quiere verificar su pertenencia al
+ *      conjunto de estados del AFD invocador
+ * 
+ * @return estado equivalente a q en caso de existir, de lo contrario
+ *      regresa el mismo estado que se da como parametro
+ */
 AFD_State* AFD::findEquivalent(AFD_State* q) {
     for (auto& x : this->states) {
         if (*x->AFTE_Equivalent == *q->AFTE_Equivalent) {
@@ -66,6 +105,11 @@ AFD_State* AFD::findEquivalent(AFD_State* q) {
     return q;
 }
 
+/**
+ * Conversion a texto.
+ * 
+ * @return texto con resumen de informacion del AFD invocador
+ */
 string AFD::toString() {
     string s = "{\n";
     s += " states:{ ";
@@ -98,6 +142,14 @@ string AFD::toString() {
     return s;
 }
 
+/**
+ * Verificar si es final.
+ * 
+ * @param q estado del cual se quiere verificar su pertenencia al
+ *      conjunto de estados finales del AFD invocador
+ * 
+ * @return true si el estado q es final, false en caso contrario
+ */
 bool AFD::isFinal(AFD_State* q) {
     for (auto& p : this->finalStates) {
         if (p == q) {
@@ -107,6 +159,12 @@ bool AFD::isFinal(AFD_State* q) {
     return false;
 }
 
+/**
+ * Generar tabla Latex.
+ * 
+ * @return string con codigo latex de la tabla de transiciones del AFD
+ *      invocador usando los identificadores de los estados
+ */
 string AFD::toLatexTable() {
     string s;
     s += "\\begin{tabular}{|r||";
@@ -146,6 +204,12 @@ string AFD::toLatexTable() {
     return s;
 }
 
+/**
+ * Generar tabla Latex con letras.
+ * 
+ * @return string con codigo latex de la tabla de transiciones del AFD
+ *      invocador usando letras para representar los estados
+ */
 string AFD::toLatexTableAlpha() {
     string s;
     s += "\\begin{tabular}{|r||";

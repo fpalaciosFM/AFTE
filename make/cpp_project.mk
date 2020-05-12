@@ -11,7 +11,7 @@ UOBJS   := $(USRCS:.cpp=.o)
 LOBJS   := $(LSRCS:.cpp=.o)
 
 ifeq ($(PLATFORM), Windows)
-	DOBJS := $(subst /,\,$(UOBJS)) $(subst /.\,$(LOBJS))
+	DOBJS := $(subst /,\,$(UOBJS)) $(subst /,\,$(LOBJS))
 else
 	DOBJS := $(UOBJS) $(LOBJS)
 endif

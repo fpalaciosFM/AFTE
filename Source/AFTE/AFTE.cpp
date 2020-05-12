@@ -1,5 +1,8 @@
 #include "AFTE.hpp"
 
+/**
+ * Constructor con estados inicial y final como parametros.
+*/
 AFTE::AFTE(AFTE_State* qi, AFTE_State* qf) {
     this->initialState = qi;
     this->finalState = qf;
@@ -7,7 +10,15 @@ AFTE::AFTE(AFTE_State* qi, AFTE_State* qf) {
 
 AFTE::~AFTE() {}
 
-// Relacion de transiciones
+/**
+ * Relacion de transiciones.
+ * 
+ * @param conjunto de estados a evaluar
+ * @param c letra correspondiente a la transicion
+ * 
+ * @return imagen del conjunto de entrada y de la letra bajo la relacion
+ *      de transiciones del AFTE invocador
+*/
 unordered_set<AFTE_State*> AFTE::RelationR(unordered_set<AFTE_State*> conjunto, char c) {
     unordered_set<AFTE_State*> conjuntoReturn;
 
@@ -20,10 +31,14 @@ unordered_set<AFTE_State*> AFTE::RelationR(unordered_set<AFTE_State*> conjunto, 
     return conjuntoReturn;
 }
 
-// ******************
-// ** AFTE Methods **
-// ******************
-
+/**
+ * Relacion de transiciones espontaneas.
+ * 
+ * @param conjunto de estados a evaluar
+ * 
+ * @return imagen del conjunto de entrada bajo la relacion de
+ *      transiciones espontaneas del AFTE invocador
+*/
 // Relacion de transiciones espontaneas
 unordered_set<AFTE_State*> AFTE::RelationE(unordered_set<AFTE_State*> conjunto) {
     unordered_set<AFTE_State*> conjuntoEC = conjunto;
@@ -50,12 +65,27 @@ unordered_set<AFTE_State*> AFTE::RelationE(unordered_set<AFTE_State*> conjunto) 
     return conjuntoEC;
 }
 
-// Funcion de transicion.
+/**
+ * Funcion de transicion del AFTE invocador.
+ * 
+ * @param conjunto de estados a evaluar
+ * @param letra correspondiente a la transicion
+ * 
+ * @return imagen del conjunto invocador y la letra bajo la funcion de 
+ *      transicion del AFTE invocador tal y como se define en la teoria
+*/
 unordered_set<AFTE_State*> AFTE::read(unordered_set<AFTE_State*> conjunto, char c) {
     return this->RelationE(this->RelationR(this->RelationE(conjunto), c));
 }
 
-// Funcion de transicion iterada.
+/**
+ * Funcion de transicion iterada del AFTE invocador.
+ * 
+ * @param stringstream a leer.
+ * 
+ * @return imagen del estado inicial iterando sobre los caracteres del
+ *      stringstream de entrada usando recursividad
+*/
 unordered_set<AFTE_State*> AFTE::read(stringstream* ss) {
     unordered_set<AFTE_State*> inputSet = {this->initialState};
     unordered_set<AFTE_State*> result = this->RelationE(inputSet);
@@ -73,7 +103,15 @@ unordered_set<AFTE_State*> AFTE::read(stringstream* ss) {
     return result;
 }
 
-// Verifica si un conjunto de estados contiene un estado final.
+/**
+ * Verificar si es final.
+ * 
+ * @param conjunto del cual se quiere verificar si contiene un estado
+ *      final, en caso afirmativo el conjunto se considera final.
+ * 
+ * @return true si conjunto contiene un estado final, false en caso
+ *      contrario
+ */
 bool AFTE::isFinal(unordered_set<AFTE_State*> conjunto) {
     for (auto& q : conjunto) {
         if (this->finalState == q) {
@@ -83,13 +121,24 @@ bool AFTE::isFinal(unordered_set<AFTE_State*> conjunto) {
     return false;
 }
 
-// Verifica si la cadena 'ss' es reconocida por el AFTE.
+/**
+ * Verifica si un string es reconocido por el AFTE invocador.
+ * 
+ * @param stringstream con cadena a reconocer
+ * 
+ * @return true si el AFTE invocador reconoce el string, false en caso
+ *      contrario
+*/
 bool AFTE::recognize(stringstream* ss) {
     unordered_set<AFTE_State*> result = this->read(ss);
     return this->isFinal(result);
 }
 
-// Imprime todos los estados del AFTE
+/**
+ * Conversion a texto.
+ * 
+ * @return texto con resumen de informacion del AFTE invocador
+ */
 string AFTE::toString() {
     string s = "{\n";
     unordered_set<AFTE_State*> statesPrinted;
@@ -98,8 +147,15 @@ string AFTE::toString() {
     return s;
 }
 
-// Imprime un unico estado del AFTE,
-// Despues se imprimen los estados que tengan una transicion desde el estado q.
+/**
+ * Funcion recursiva que imprime un estado q del AFTE y despues se
+ * imprimen los estados que tengan una transicion desde el estado q.
+ * 
+ * @return string con informacion del estado q si no pertenece al
+ *      conjunto statesPrinted, y con informacion de los estados que
+ *      tienen un camino desde q y que tampoco pertenezcan al conjunto
+ *      statesPrinted. Puede ser vacia
+*/
 string AFTE::toString(AFTE_State* q, unordered_set<AFTE_State*> statesPrinted) {
     string s;
     if (isStateIn(q, statesPrinted)) {
@@ -122,10 +178,13 @@ string AFTE::toString(AFTE_State* q, unordered_set<AFTE_State*> statesPrinted) {
     return s;
 }
 
-// *******************
-// ** Latex Methods **
-// *******************
-
+/**
+ * Inicializar recursividad para obtener codigo Latex del diagrama de
+ * transiciones.
+ * 
+ * @return string con codigo latex del diagrama de transiciones del AFTE
+ *      invocador.
+*/
 string AFTE::toDiagram() {
     string diagram, nodes, edges;
     unordered_set<AFTE_State*> states_inserted;
@@ -142,6 +201,17 @@ string AFTE::toDiagram() {
     return diagram;
 }
 
+/**
+ * Funcion recursiva para generar el codigo Latex del diagrama de
+ * transiciones del AFTE invocador.
+ * 
+ * @param q estado a imprimir
+ * @param states_inserted conjunto de estados insertados
+ * @param nodes string con las lineas de codigo Latex que definen los
+ *      nodos del diagrama
+ * @param edges string con las lineas de codigo Latex que definen las
+ *      transiciones del diagrama
+*/
 void AFTE::toDiagram(AFTE_State* q, unordered_set<AFTE_State*>* states_inserted, string* nodes, string* edges) {
     if (isStateIn(q, *states_inserted)) {
         return;
