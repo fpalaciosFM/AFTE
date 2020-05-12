@@ -1,5 +1,8 @@
 #include "AFD.hpp"
 
+/**
+ * Conversion de AFTE a AFD.
+ */
 AFD::AFD(AFTE M) : AFD() {
     unordered_set<AFTE_State*> inputSet = M.RelationE({M.initialState});
     AFD_State* newInitialState = new AFD_State(inputSet);
@@ -14,6 +17,16 @@ AFD::AFD(AFTE M) : AFD() {
     }
 }
 
+/**
+ * Agregar estado.
+ * 
+ * Agrega un estado al conjunto de estados. En caso de que el estado
+ * equivalente en AFTE sea final, entonces se agrega al conjunto de
+ * estados finales del AFD invocador.
+ * 
+ * @param q estado a agregar
+ * @param M AFTE equivalente al AFD invocador
+ */
 void AFD::addState(AFD_State* q, AFTE M) {
     this->states.insert(q);
     if (M.isFinal(*q->AFTE_Equivalent)) {
