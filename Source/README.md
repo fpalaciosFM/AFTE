@@ -2,8 +2,8 @@
 
 Este proyecto se compone de 4 partes principales:
 
-- Expresiones Regulares (RegExpr)
 - Nodos (Node)
+- Expresiones Regulares (RegExpr)
 - Autómatas Finitos de Transiciones Espontáneas (AFTE)
 - Autómatas Finitos Deterministas (AFD)
 
@@ -13,12 +13,18 @@ Dentro de los directorios correspondientes a cada parte se encuentra un archivo 
 
 A continuación se presenta información general sobre cada parte del proyecto.
 
-# Expresiones Regulares
-
-
-
 # Nodos
+
+
+
+# Expresiones Regulares
 # Autómatas Finitos de Transiciones Espontáneas
 # Autómatas Finitos Deterministas
 
+
+A continuación se muetra el diagrama de clases completo:
+
+
+
+![Diagrama de Clases](../Readme_Source/Source_Dir/AFTE_Class_Diagram.svg "Diagrama de Clases")
 
