@@ -22,7 +22,11 @@ Y tres tipos de nodo binario:
 
 El único atributo que tiene la clase `Node` es `texString` de tipo `string`. Esta cadena de texto representa el símbolo que se rotulará en el nodo de la correspondiente instancia de la clase `Node`. Este atributo puede ser una formula de LaTeX. Por ejemplo, para el nodo `N` con diagrama:
 
-[Node Ejemplo1](../../Readme_Source/Node/Nodo_EmptySet.png "Ejemplo 1")
+<center>
+
+![Node Ejemplo1](../../Readme_Source/Node/Nodo_EmptySet.png "Ejemplo 1")
+
+</center>
 
 Se tendría  
   
