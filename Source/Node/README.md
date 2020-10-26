@@ -28,6 +28,8 @@ El único atributo que tiene la clase `Node` es `texString` de tipo `string`. Es
 
 Se tendría  `N.texString = "$\emptyset$"`
 
+## Métodos Básicos
+
 La clase `Node` tiene los siguientes métodos básicos (públicos):
 
 - `int Type()`
@@ -44,3 +46,26 @@ El primero hace uso de la enumeración definida en el archivo `Node.hpp` que con
 - `CLOSURE`
 
 Que corresponden a cada tipo de nodo que se utilizará en el proyecto.
+
+El método `int Type()` regresa la constante correspondiente al tipo de nodo de la instancia invocadora.
+
+El método `Node* Copy()` tiene como finalidad devolver un apuntador a una nueva instancia de `Node` con los mismos atributos y apuntando a copias de los nodos hijos del nodo invocador. Para el caso de los nodos finales sólo es necesario hacer copia del atributo `texString`.
+
+El método `Node* Simp()` tiene la finalidad de devolver un apuntador de `Node` de la instancia invocadora pero simplificada. El método de simplificación depende de cada tipo de nodo, pero para los nodos finales simplemente se regresa una copia usando el método `Node* Copy()`.
+
+## Arbol de Derivación
+
+Los métodos que se utilizan para generar el código ``LaTeX`` que representa el arbol de derivación de una expresión regular a partir de la clase `Node` son:
+
+- ``string getTexStr()``
+- ``virtual string printTree()``
+- ``virtual string printTree(int&)``
+
+``getTexStr`` simplemente devuelve el atributo `texString` del nodo invocador.
+
+El método `printTree()` tiene como finalidad devolver el código ``LaTeX`` de la expresión regular que está representado por el correspondiente nodo invocador. Este método inicia la generación recursiva del código `LaTeX` invocando al método ``printTree(int&)`` con valor inicial `0` como parámetro, el cual cuenta el número de espacios que debe haber entre nodos que se encuentran en el mismo nivel del correspondiente arbol de derivación.
+
+El método `printTree(int&)` obtiene el código `LaTeX` de los nodos hijos del nodo invocador, además de que calcula los espacios entre nodos del mismo nivel en el arbol de derivación correspondiente. Para más detalles revisar el README.md del directorio `BinOp`.
+
+## Diagrama de AFTE
+
