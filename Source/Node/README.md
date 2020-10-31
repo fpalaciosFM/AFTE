@@ -69,3 +69,24 @@ El método `printTree(int&)` obtiene el código `LaTeX` de los nodos hijos del n
 
 ## Diagrama de AFTE
 
+Para la generación del diagrama de transiciones del AFTE se utilizan los siguientes atributos públicos:
+
+- ``double height``
+- ``double width``
+- ``const double E = 1.0``
+- ``const double N = 1.0``
+
+Estos atributos se utilizan para almacenar las dimensiones correspondientes al diagrama de la respectiva instancia de nodo. Los atributos `height` y `width` corresponden a la altura y al ancho del diagrama respectivamente. Las constantes `E` y `N` corresponden al tamaño de las aristas y nodos del diagrama respectivamente.
+
+El método `initDims()` tiene como propósito calcular de forma recursiva las dimensiones de los nodos hijos del nodo invocador y, a partid de estos valores, calcular las dimensionas del nodo invocador.
+
+## Conversión a AFTE
+
+Para la conversión de expresión regular a AFTE se utilizan los siguientes métodos:
+
+- `virtual AFTE toAFTE()`
+- `virtual AFTE toAFTE(double x, double y)`
+
+El método `virtual AFTE toAFTE(double x, double y)` genera de forma recursiva al AFTE que representa a los nodos hijos del nodo invocador y a partir de estos se genera el AFTE del nodo invocador.
+
+El método `virtual AFTE toAFTE()` simplemente inicializa la recursividad invocando el método `virtual AFTE toAFTE(double x, double y)` con los valores iniciales `x = y = 0`.
