@@ -9,12 +9,12 @@
 using namespace std;
 
 enum {
-    LETTER,
     EMPTY,
     LAMBDA,
-    UNION,
+    LETTER,
+    CLOSURE,
     CONCAT,
-    CLOSURE
+    UNION
 };
 
 class Node {
