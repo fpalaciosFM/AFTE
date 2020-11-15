@@ -53,6 +53,7 @@ int main(int argc, char const *argv[]) {
 
     return 0;
 }
+
 void syntax_help() {
     cerr << " Expected regular expression as first parameter" << endl;
     cerr << " Usage:" << endl;
