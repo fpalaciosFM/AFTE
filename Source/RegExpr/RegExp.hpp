@@ -15,9 +15,6 @@ class RegExpr {
     RegExpr& operator=(const RegExpr& e);
     friend ostream& operator<<(ostream& os, const RegExpr& e);
     friend istream& operator>>(istream& is, RegExpr& e);
-    friend RegExpr operator+(const RegExpr& a, const RegExpr& b);
-    friend RegExpr operator*(const RegExpr& a, const RegExpr& b);
-    friend RegExpr operator*(const RegExpr& a);
     string printTree();
     AFTE toAFTE();
 };

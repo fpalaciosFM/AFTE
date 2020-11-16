@@ -33,19 +33,6 @@ istream& operator>>(istream& is, RegExpr& e) {
     return is;
 }
 
-RegExpr operator+(const RegExpr& a, const RegExpr& b) {
-    return RegExpr(new Union(a.ptr->Copy(), b.ptr->Copy()));
-}
-
-RegExpr operator*(const RegExpr& a, const RegExpr& b) {
-    return RegExpr(new Concatenation(a.ptr->Copy(), b.ptr->Copy()));
-}
-
-RegExpr operator*(const RegExpr& a) {
-    Node* r = new Closure(a.ptr->Copy());
-    return RegExpr(r);
-}
-
 string RegExpr::printTree() {
     return ptr->printTree();
 }
