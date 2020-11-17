@@ -19,7 +19,4 @@ class RegExpr {
     AFTE toAFTE();
 };
 
-void PrintMat(RegExpr** A, int N);
-void Arden(RegExpr** A, int N);
-
 #endif /* REGEXPR_HPP */
